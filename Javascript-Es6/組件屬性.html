@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>React 前端開發：快速入門範例</title>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script type="text/javascript">
+   /*
+   建立完組件後賦予屬性 此時屬性稱為 props
+   React.createElement(
+       "組件類別名稱","組件屬性","組件子原件"  //設定組件時可以設定組件的屬性
+       )
+   */
+
+class abc extends React.Component{
+    render(){
+        console.log(this.props)  //此時已經給定屬性可以在console裡查看 這裡給的屬性為 {level:3} 
+        return React.createElement(
+            "h"+this.props.level ,"null" ,"hello"   //可以利用賦予的屬性來讓 "類別名稱" 達到彈性可以修改的效果
+        )
+    }
+}
+window.addEventListener("load",()=>{
+    let mycomponent=React.createElement(abc,{level:1})  //建立組件實體時給定 屬性為{level:3} 此時可以再定義組件的地方使用console.log(this.props)查看賦予的屬性
+    ReactDOM.render(mycomponent,document.body);
+})
+</script>
+</head>
+<body>
+<img src="組件屬性1.jpg" width="700px" height="500px"></img>
+</body>
+</html>

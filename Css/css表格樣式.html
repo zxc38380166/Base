@@ -1,0 +1,53 @@
+<html>
+<head>
+  <meta charset="utf-8"></meta>
+  <title>css表格樣式</title>
+  <style type="text/css">
+  table{
+  width:400px;
+  /* 若要將兩個框線合成一個框線寫法如下 */
+  border-collapse:collapse;
+  }
+  
+  td{
+  border-bottom:1px solid #888888;padding:10px;
+  }
+  
+  /* nth-child(1)為將表格中的第一對tr套用宣告的格式 */
+  tr:nth-child(1){
+  background-color:#AAAAFF;color:#ffffff;
+  }  
+  
+  /* nth-child(even)為將表格中的第偶數對tr套用宣告的格式*/
+  tr:nth-child(even){
+  background-color:#e8e8e8;
+  }
+  </style>
+
+
+
+</head>
+ 
+<body>
+ <h3>中華職棒</h3>
+ <table>
+  <tr>
+     <td>名稱</td>
+     <td>勝</td>
+     <td>敗</td>
+  </tr>  
+  <tr> 
+     <td>統一獅</td>
+     <td>9</td>
+     <td>8</td>
+  </tr>
+  <tr>
+     <td>兄弟象</td>
+     <td>7</td>
+     <td>6</td>
+  </tr> 
+   
+ </table>
+ </body>
+ </html>
+ 

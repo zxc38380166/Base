@@ -1,0 +1,52 @@
+        <div class="head1">
+            <div class="menu">
+                <BUtton onclick="data2()">
+                    <h3>鱷魚線 <br>(Alligator)</h3>
+                </BUtton>
+                <BUtton onclick="mdata1()">
+                    <h3>一目均衡雲<br>(Ichimoku)</h3>
+                </BUtton>
+                <BUtton onclick="mdata2()">
+                    <h3 id="button">指數平滑異同移動平均線<br>(MACD)</h3>
+                </BUtton>
+            </div>
+
+            <div id="content">
+                <img src="圖片素材/鱷魚線.png">
+                <div class="text" id="text">
+
+                    <div class="text-1">
+                        <h3>鱷魚線指標</h3>
+                        <p>鱷魚線這個指標是Bill William在1998年所提出來的，這個指標旨在判定趨勢，
+                            利用藍線－顎(jaw)、紅線－齒(teeth)、綠線－唇(lip)及價格的相對位置，分屬不同的意義；
+                            並且在配合碎形fractal後可進一步得到進出訊號。</p>
+                        <h3>指標介紹</h3>
+                        <p>藍線，是鱷魚的顎。取13根bar的平滑移動平均，然後將算出來的結果往未來的方向移動8根bar。
+                            紅線，是鱷魚的牙齒。取8根bar的平滑移動平均，然後將算出來的結果往未來的方向移動5根bar所構成。
+                            綠線，是鱷魚的上唇。取5-bar 平滑移動平均數，然後將算出來的結 果往未來的方向移動3根bar所構成。</p>
+                        <h3>指標運用</h3>
+                        <p>開口向上：當唇線(綠)、齒(紅)、顎(藍)由上而下依此順序排列時，表示鱷魚向上張口，準備大咬牛肉。
+                            此時的市場趨勢會呈現明確的上升趨勢，且當鱷魚線的開口越大時，代表波動越強。
+                            三線糾結：當三條線互相糾結，彼此時而上時而下，代表鱷魚進入休眠期，此時市場進入震盪整理，無明確的方向性。
+                            以趨勢操作的投資人此時應該空手，避免磨耗資金。開口向下：當先行排列由上而下呈現出顎(藍)、齒(紅)、唇(綠)的時候，
+                            表示鱷魚向下開口準備追殺熊市。此時市場趨勢將會是下跌趨勢(如圖中標示3)，同樣的開口越大表示價格波動越大。</p>
+                    </div>
+
+                    <div class="text-2">
+                        <h3>公式</h3>
+                        <h4>藍色顎線(jaw) ──</h4>
+                        <li>1.取Median Price MPt = (Ht + Lt) / 2──</li>
+                        <li>2.取 MPt 的13日平滑移動，EMPt = EMPt-1 + 2 / (13+1) * ( MPt - EMPt-1 )</li>
+                        <li>3.取8天前的EMPt值作為當天的顎線值，即 JWt = EMAt-8</li>
+                        <h4>紅色齒線(teeth) ──</h4>
+                        <li>1.取Median Price MPt = (Ht + Lt) / 2</li>
+                        <li>2.取 MPt 的8日平滑移動，EMPt = EMPt-1 + 2 / (8+1) * ( MPt - EMPt-1 )</li>
+                        <li>3.取3天前的EMPt值作為當天的顎線值，即 TWt = EMAt-5</li>
+                        <h4>綠色唇線(lip) ──</h4>
+                        <li>1.取Median Price MPt = (Ht + Lt) / 2</li>
+                        <li>2.取 MPt 的5日平滑移動，EMPt = EMPt-1 + 2 / (5+1) * ( MPt - EMPt-1 )</li>
+                        <li>3.取3天前的EMPt值作為當天的顎線值，即 TWt = EMAt-3</li>
+                    </div>
+                </div>
+            </div>
+        </div>

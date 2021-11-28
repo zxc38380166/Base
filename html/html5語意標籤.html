@@ -1,0 +1,42 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>html5語意標籤</title>
+<script type="text/javascript">
+    var cvs, ctx;
+window.onload=function(){
+    cvs=document.getElementById("cvs");
+    ctx=cvs.getContext("2d");
+    var img=new Image();
+    img.src="html5語意標籤概念圖.jpg";
+    img.onload=function(){
+        ctx.drawImage(img, 0, 0, cvs.width, cvs.height);
+    }
+}
+
+
+</script>
+</head>
+<body>   <!--以下是傳統方式撰寫網頁 (css以class選擇器撰寫優先)-->
+<canvas id="cvs" width="1000" height="500" style="border:1px solid #000000"></canvas>
+ <div class="header">網頁標題</div>
+ <div class="nav">網頁導覽/選單</div>
+ <div class="main">
+   <div class="article">網頁內容</div>
+   <div class="aside">額外資訊</div>
+ </div>  
+ <div class="footer">網頁底部</div>
+
+ <p></p>
+
+ <header>網頁標題</header>  <!--以下是html5方式撰寫網頁  (css以標籤名稱選擇器撰寫優先) 此方式優點為增加google搜尋率-->
+ <nav>網頁導覽/選單</nav>
+ <main>
+   <article>網頁內容</article>
+   <aside>額外資訊</aside>
+ </main>  
+ <footer>網頁底部</footer>
+
+
+</body>
+</html>

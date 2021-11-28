@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+<body>
+    <div id="demo">
+        <alert2></alert2>
+    </div>
+</body>
+<script>                    // extends 能將單一個元件的資料及方法帶入
+    const alert3 = {
+        data() {
+            return {
+                name:"ucoco"
+            }
+        },
+        created() {
+            console.log("alert3的生命週期");
+            this.name+="ice"
+        },
+    }
+
+    const app = Vue.createApp({})
+    app.component('alert2',{
+        created(){
+            console.log("alert2的生命週期",this.name)   // 此時以共用其他區域元件資料 故可以直接讀取其他區域元件的資料
+        },
+        template:
+        `
+        <div>{{ name }}</div>
+        `
+        ,
+        extends:alert3
+    })
+    /*
+        注意事項 : 
+            擴展為單一擴展
+            生命週期可以與mixins重複觸發
+            權重 元件屬性 > mixins > extends
+            同名的資料或方法會以權重決定
+    */
+    
+    app.mount('#demo')
+</script>
+</html>

@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>ES6箭頭函式-觀念</title>
+<script type="text/javascript">
+//  (參數列表)=>(回傳值)
+//傳統函式(回傳值)寫法
+let add=function(n1,n2){
+    return n1+n2;      //傳統寫法需要回傳值必須寫return將值寫入
+}  
+//箭頭函式(回傳值)寫法
+let add=(n1,n2)=>(n1+n2);  //不必寫return，使用後方小括號傳遞回傳值
+
+
+//  (參數列表)=>{函是內部程式}
+//傳統函式(程式碼)寫法
+let add=function(n1,n2){  //n1,n2為參數
+    return n1+n2;   //return回傳值故add=n1+n2
+}
+//箭頭函式(程式碼)寫法
+let add=(n1,n2)=>{  //捨去function並在參數後方加上=>
+    return n1+n2;
+}
+
+//延伸範例1
+let f=()=>(5);       //採用兩個小括號 為 (參數)=>(回傳)
+let abc=f();
+console.log(abc);    //abc中的變數資料因回傳值所以是 "5"
+//延伸範例2
+let f=(message)=>{   //採用大括號 為 (參數)=>{程式碼}
+    console.log(message)  
+f("hello");  //利用參數將hello放入參數且執行 f函式 故console得到 "hello"
+
+//傳統函式(匿名函式)寫法(沒有名子的函式，通常搭配其他功能使用)
+setTimeout(function(){   //在1秒鐘後執行此函式
+    console.log("過了一秒鐘");
+},1000); 
+
+//箭頭函式(匿名函式寫法)
+setTimeout(()=>{
+    console.log("過了一秒鐘");
+},1000);
+</script>
+</head>
+<body>
+
+</body>
+</html>

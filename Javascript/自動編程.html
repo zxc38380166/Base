@@ -1,0 +1,36 @@
+<htlm>
+<head>
+ <meta charset="utf-8"></meta>
+ <title>自動編程</title>  <!--意指在設定時間後執行所需動作-->
+ <script type="text/javascript">
+var timer;
+function init(){
+    timer=document.getElementById("timer");
+    window.setTimeout(countdown,1000);  //window.setTimeout代表讓系統在1000毫秒(1秒)後執行countdown這個函式
+
+}
+function countdown(){
+    //alert("hello");
+    timer.innerHTML=timer.innerHTML-1;  //將timer裡面的改成timer.innerHTML-1 意指每執行1次都會-1 (下方寫法為1秒後執行一次此函式所以每秒-1)
+    window.setTimeout(countdown,1000); //setTimeout執行一次就會停下來(寫法為1秒後執行一次此函式所以每秒-1)
+}
+
+function countdown(){
+    timer.innerHTML=timer.innerHTML-1;  //將timer裡面的改成timer.innerHTML-1 意指每執行1次都會-1 (下方寫法為1秒後執行一次此函式所以每秒-1)
+    if(timer.innerHTML>0){ 
+        window.setTimeout(countdown,1000); //(寫法為1秒後執行一次此函式所以每秒-1)
+    }else{
+        document.location="http://yahoo.com.tw"; //location為將網頁導向=後網址
+    }
+}
+
+
+</script>       
+</head>
+<body onload="init();"> <!--當載入body後執行init()-->
+ <span id="timer">3</span>
+ 
+
+
+</body>
+</html>

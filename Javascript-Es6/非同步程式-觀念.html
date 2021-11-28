@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>非同步程式-觀念</title>
+<script type="text/javascript">
+//非同步程式非為 "主程式" 及 "背景子程式" 兩者組成
+//程式中包含子程式皆為 非同步處理程式
+
+// 範例一 (時間排程)  示意圖如 圖1
+window.setTimeout(function(){ //【主程式】設定完排程後,交由【背景子程式】負責監控時間
+    //兩秒後,【背景子程式】喚醒【主程式】,執行此函式
+    alert("兩秒後執行")
+},2000);
+//【主程式】設定為排程後立刻往下執行
+alert("立刻被呼叫")
+//主程式結束暫時沒事做
+
+// 範例二 (事件處理函式) 示意圖如 圖2 
+function getData(){           //執行Ajax函式
+let req=new XMLHttpRequest(); //建立一個連線物件
+req.open("get", "data.txt")   //設定 連線方法 "get" 網址為 "data.txt"
+req.onload=function(){
+    alert(this.responseText); //當網頁載入時執行函式,取得伺服器的回應
+    }
+//【主程式】送出連線後,交由【背景子程式】負責處理連線細節
+req.send();  
+}
+//【主程式】送出連線後,立刻往下執行
+alert("立刻被呼叫");
+//主程式結束,暫時沒事做
+</script>
+
+</head>
+<body>
+<img src="非同步程式-觀念1.jpg" width="1000px" height="600px"></img>
+<img src="非同步程式-觀念2.jpg" width="1000px" height="600px"></img>
+</body>
+</html>

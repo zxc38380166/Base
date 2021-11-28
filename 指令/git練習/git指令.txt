@@ -1,0 +1,19 @@
+D:             	            //設定工作區槽位
+
+CD E:\git練習  	            //設定工作區路徑
+
+git init                    //初始化git
+
+git status     	            //查詢狀態
+
+git add .                   //將修改紀錄放進暫存區
+
+git commit -m "xxx"         //將暫存區放入倉庫 並命名為 "xxx"
+
+git remote add "xx" "yy"    //設定遠端空間的名子為 "xx" 並帶入網址 "yy"
+
+git remote -v               //確認遠端空間狀態
+
+git push "xx" master        //將儲存在倉庫的版本上傳至名為 "xx" 的遠端空間
+
+git clone "yy" "zz"         //下載在 "yy"網址的檔案 並放在"zz"資料夾  資料夾名稱可以自行設置

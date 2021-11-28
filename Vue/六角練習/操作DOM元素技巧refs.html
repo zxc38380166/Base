@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="demo">
+        <input type="text" ref="inputDOM"> <!-- 建立ref地址 -->
+        <div ref="model"></div> <!-- 建立ref地址 -->
+        <button type="button" @click="getComponentText">更新元件標題</button>
+        <card ref="card"></card> <!-- 建立ref地址 -->
+        {{ text }}
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                text: '',
+            }
+        },
+        mounted() {
+            console.log(this.$refs, ) // ref會在mounted生命週期中才讀取到
+        },
+        methods: {
+            getComponentText() {
+                this.$refs.card.title = "被更新的標題" //利用方法取得別的元件的資料並利用ref修改元件內的資料
+                this.text = this.$refs.card.main + " , 這是取的別的原件中的內容並加入heml內" //亦可用來更新自身資料
+            }
+        },
+    })
+    app.component("card", { //建立元件
+        data() {
+            return {
+                title: "元件標題",
+                main: "元件內容",
+            }
+        },
+        template: `
+            <h3>{{ title }}</h3>
+            <p>{{ main }}</p>
+        `
+    })
+    app.mount("#demo")
+</script>
+
+</html>

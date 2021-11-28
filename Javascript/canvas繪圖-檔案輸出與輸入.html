@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>canvas繪圖-檔案輸出與輸入</title>
+<script type="text/javascript">
+var cvs, ctx;
+window.onload=function(){
+   cvs=document.getElementById("cvs");  //取得document裡id名為cvs的標籤
+   ctx=cvs.getContext("2d");            //取得cvs裡的物件並設定為2d繪圖
+/*@
+   var img=new Image();                 //宣告img變成new Image(瀏覽器的影像標籤)
+   img.src="123.jpg";                   //img.src為將圖片連結帶入img內
+   img.onload=function(){               //img.onload為因為圖片還未載入時無法繪圖，故當圖片載入時執行以下函式
+     ctx.drawImage(img, 0, 0, cvs.width, cvs.height);  //ctx.drawImage為將ctx(2d繪圖)套上drawImage屬性並利用參數設定圖片規格分別為(圖像標籤 ,x座標, y座標, 寬, 高)    
+    } ;*/
+}
+
+
+function invertColor(){
+ var pixels=ctx.getImageData(0, 0, cvs.width, cvs.height); //getImageData為取得ImageData物件(繪圖像素數據)
+ var data=pixels.data;  //將data宣告為ImageData物件之下的data屬性，他是一個陣列存放所有像素資訊，1 個像素佔據 4 個資料(bytes)分別為 r(紅) , g(綠) , b(藍) , a(透明) {範圍為0~255}
+ 
+ for(var i=0;i<data.length;i+=4){  //以下迴圈未搞懂 08/13 
+   data[i]=255-data[i];
+   data[i+1]=255-data[i+1];
+   data[i+2]=255-data[i+2]; 
+  } 
+ ctx.putImageData(pixels, 0, 0);
+}
+
+function loadFile(input){              //利用參數將input帶入函式
+  var file=input.files[0];           //宣告file為input裡面的files  files為存放在此的物件的陣列  [0]則為編號這裡代表的是第1個上傳的物件
+  var src=URL.createObjectURL(file); // URL.createObjectURL為將物件轉換為網址的型態  (file)參數則是將file裡的物件帶入轉換  因此現在scr=物件的網址
+  var img=new Image();               //img=建立一個新的瀏覽器影像標籤
+  img.src=src;                       //因上方已經將物件轉換為 URL(網址) 且放進 scr 內故直接將 scr 放進 img.scr(影像的網址)
+  img.onload=function(){             //當載入影像時執行以下函式
+  ctx.drawImage(this, 0, 0, cvs.width, cvs.height);//函式(ctx.drawImage為將ctx(2d繪圖)套上drawImage屬性並利用參數設定圖片規格分別為(圖像標籤 ,x座標, y座標, 寬, 高)
+ };
+}
+function saveFile(){
+  var link=document.getElementById("download"); //找到id名為download的標籤宣告進link裡
+  link.download="image.jpg";             //檔案下載下來預設的檔案名稱
+  link.href=cvs.toDataURL("image/jpeg"); //toDataURL為將影像格式設定為jpeg後轉換成URL(網址)後放入href(超連結)
+  link.click();                          //之後手動觸發link
+}
+</script>
+
+</head>
+<body>
+<div> 
+  <input type="file" onchange="loadFile(this);"/> <!--input type="file" 為生成能載入圖片的按鈕，onchange="loadFile(this)為當點擊時執行loadFile(this)函式參數則為this(自身，在此代表的是input)-->
+  <button onclick="saveFile();">儲存檔案</button>
+  <a id="download"></a>
+  <button onclick="invertColor();">顏色的反轉</button> <!--創建一個按鈕，點擊時啟動invertColor()函式-->
+</div>     
+  <canvas id="cvs" width="800" height="600" style="border:1px solid #000000"></canvas>
+</body>
+
+</html>

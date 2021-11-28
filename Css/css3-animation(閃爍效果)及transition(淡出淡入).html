@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>css3-animation(閃爍效果)及transition(淡出淡入)</title>
+<script type="text/javascript">
+function start( ){
+   var text=document.getElementById("text"); //取得id名為text物件並宣告進text內
+   text.classList.add("effect");   //classList.add為添加入一個css元素 add為新增
+};
+
+window.onload=function(){
+  var box=document.getElementById("box");  //取得id名為box的標籤並宣告進box內
+  box.style.opacity=1;    //將box的opacity(透明度)設定為1
+  
+  var box1=document.getElementById("box1");
+  box1.addEventListener("mouseover", function(){  //新增(add)一個事件處理器(EventListener)( mouseover為當滑鼠觸碰時執行函式 )
+      box1.style.opacity=1;    //將box1的opacity(透明度)設定為1
+  });
+  box1.addEventListener("mouseout", function(){   //新增(add)一個事件處理器(EventListener)( mouseout為當滑鼠離開時執行函式 )
+      box1.style.opacity=0.5;  //將box1的opacity(透明度)設定為0.5
+  });
+};
+
+   
+</script>
+<style type="text/css">
+/*利用animation做出閃爍效果*/
+/*要先定義動畫 ex. 透明度0-1 或 從左至右 */
+.effect{
+    animation:blink 1s infinite; /*animation為播放動畫blink為要播放的動畫名稱 1s為每1秒執行一次*/
+}
+@keyframes blink{  /*keyframes為定義動畫 blink為動畫名稱*/
+    0%{opacity:0}  /*動畫執行到0%的時候執行透明度為0*/
+    50%{opacity:1} /*動畫執行到50%的時候執行透明度為1*/
+    100%{opacity:0}/*動畫執行到100%的時候執行透明度為0 (以上利用播放進度與透明度達成閃爍效果) */
+}
+
+/*利用transition製作淡入淡出效果*/
+.box{
+    width:100px;height:100px;background-color:red;opacity:0.1;  /*寬度為100 高度為100 背景色為紅色 opacity為css3裡面的透明度設定為0.5(半透明)*/
+    transition:opacity 5s;  /*transition為監控css內單一屬性(這裡指的是opacity屬性)，一但我們用javascript對opaticy進行設定 自動漸變處理(數值遞增或遞減的概念)*/
+}
+
+.box1{
+    width:100px;height:100px;background-color:red;opacity:0.1;  /*寬度為100 高度為100 背景色為紅色 opacity為css3裡面的透明度設定為0.5(半透明)*/
+    transition:opacity 1s;  /*transition為監控css內單一屬性(這裡指的是opacity屬性)，一但我們用javascript對opaticy進行設定 自動漸變處理(數值遞增或遞減的概念)*/
+}
+</style>
+</head>
+<body>
+    <div class="effect">hello</div>
+    <div id="text">hi</div>
+    <button onclick="start();">start</button> 
+    <div class="box" id="box"></div>
+    <div class="box1" id="box1"></div>
+</bodt>
+</html>

@@ -1,0 +1,141 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>類別繼承-觀念</title>
+<script type="text/javascript">
+// "車子為類別" 的設計 ， 電動車 "繼承" 車子的類別 ， 電動車的設計也就是車子設計衍伸而來
+// 子類別 : 與父類別相同，但加入額外的東西
+//類別繼承會用到的關鍵字 "extends" ， "super"
+
+// 一. 父類別與子類別的建立
+//定義一個類別
+class car{
+    constructor(){
+        console.log("執行父類別建構式,建立基本的car物件");
+    }
+}
+//定義子類別
+class ElectricCar extends car{   //定義ElectricCar為子類別  extends為定義父類別 此時表示car為父類別
+    constructor(){
+        super();       //利用super()呼叫父類別建構式 (執行子類別必須先呼叫父類別)
+        console.log("繼續執行子類別建構式,衍伸出 ElectricCar 物件");
+    }
+}
+let car=new ElectricCar(); //呼叫子類別 因子類別當中有寫到呼叫父類別 故會先執行一次父類別的建構式後再執行子類別建構式
+
+// 二. 加入屬性  後方數字為讀取順序
+class car{
+    constructor(color){
+        this.color=color;  //此時this代表car , car的color屬性設定為color，因constructor(color)故填寫的參數則會帶入  1
+    }
+}
+class ElectricCar extends car(){ //定義ElectricCar為子類別  extends為定義父類別 此時表示car為父類別
+    constructor(color){ //參數被帶入後若呼叫父類別則將參數再次帶入父類別參數中                                        3
+        super(color);   //呼叫父類別                                                                                 4
+    }
+}
+let car=new ElectricCar("green"); //將green帶入ElectricCar(子類別參數)                                               2
+console.log("車子的顏色:"+car.color);  //此時父類別 "color屬性被帶入參數green" ，但 "子類別car.color依然可以讀取父類別的屬性" 最終顯示 " 車子的顏色:green "
+
+// 三. 加入run方法
+class car{
+    constructor(color){
+        this.color=color;
+    }
+    run(){    //定義run方法在父類別中
+        console.log("car"+this.color+"is Running")
+    }
+}
+class ElectricCar extends car{
+    constructor(color){
+        super(color);
+    }
+}
+let car=new ElectricCar("green")
+car.run();  //此時run方法定義在父類別當中,但因子類別隸屬父類別所以也能 "直接從子類別呼叫run"
+
+// 四. 加入battery屬性,紀錄電量
+class car{
+    constructor(color){
+        this.color=color;
+    }
+    run(){    
+        console.log("car"+this.color+"is Running")
+    }
+}
+class ElectricCar extends car{
+    constructor(color){
+        super(color);
+        this.battery=100;    //"衍伸更多子類別" , "電動車的專屬定義" (battery為專門用來記錄電池使用狀況的屬性)
+    }
+}
+let car=new ElectricCar("green")
+console.log("目前的電量"+car.battery);  //使用子類別中定義的屬性  "此屬性只隸屬子類別不隸屬父類別"
+
+// 五. 在子類別加入run,覆蓋父類別中的run方法
+class car{
+    constructor(color){
+        this.color=color;
+    }
+    run(){    
+        console.log("car"+this.color+"is Running")
+    }
+}
+class ElectricCar extends car{
+    constructor(color){
+        super(color);
+        this.battery=100;    
+    }
+    run(distance){      //在子類別中定義run方法,覆蓋/取代父類別中的 "同名方法"
+        this.battrey-=distance;
+        console.log("car"+this.color+"Runs"+distance+"km")
+    }
+}
+let car=new ElectricCar("green")
+car.run(10); //此時呼叫的run為子類別中最新覆蓋的,參數10則會帶入distance,印出 car green Runs 10 km
+console.log("目前的電量"+car.battery); //子類別建構函式先將battery定義為100 , 執行子類別run方法時又將battery設定為this.battrey-=distance , 然後已經執行過run方法故此時battery=100-10=90 , 印出目前的電量:90
+
+// 六. 在子類別中加入專屬得charge方法
+class car{
+    constructor(color){
+        this.color=color;
+    }
+    run(){    
+        console.log("car"+this.color+"is Running")
+    }
+}
+class ElectricCar extends car{
+    constructor(color){
+        super(color);
+        this.battery=100;    
+    }
+    run(distance){      
+        this.battrey-=distance;
+        console.log("car"+this.color+"Runs"+distance+"km")
+    }
+    charge(){   //定義一個專屬子類別的方法 若呼叫則會將 battery設定為100 用作充電
+        this.battery=100;
+    }
+}
+let car=new ElectricCar("green")
+car.run(10);  //執行最新的run方法後 100-10=90 為當前電量
+car.charge(); //執行charge方法後會將battery在設定為100 , 達到充電效果
+console.log("目前的電量"+car.battery)  //此時因以充電 會印出 目前的電量:100
+
+</script>
+
+
+
+
+<style type="text/css">
+img{
+    width: 600px;height: 500px;
+}
+</style>
+</head>
+<body>
+<img src="類別繼承-觀念1.jpg" ></img>
+<img src="類別繼承-觀念2.jpg" ></img>
+
+</body>
+</html>

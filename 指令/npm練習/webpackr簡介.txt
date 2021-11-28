@@ -1,0 +1,20 @@
+webpack是甚麼 :
+	核心 : 模組打包
+	衍伸 : 專案建置
+ 
+為什麼要使用webpack
+	核心 : 支援程式的模組化 (export/import)
+	衍伸 : 支援各種特殊語法的編譯和載入 (ReactJSX)
+
+安裝webpack到專案中
+	安裝 webpack 和 webpack-cli 兩個開發階段用的套件
+	npm install webpack webpack-cli --save-dev
+
+使用webpack建置專案 
+	在 package.json 專案描述檔中,定義webpack建置命令
+	在終端機執行 webpack 建置命令
+
+專案建置的觀察重點 
+	執行建置之後,是否有任何錯誤訊息 (通常是紅色必定要解決)
+	建置完成之後,是否在 dist 子資料夾下產生可執行的程式碼
+	簡單的建立一個網頁測試可執行的程式碼

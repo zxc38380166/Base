@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>表單處理 Form Handling</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>   
+        <script type="text/babel">
+            class Myfrom extends React.Component{
+                constructor(props){
+                    super(props);
+                    this.state={
+                        Name:"",
+                        Player:"Player1",
+                        ex:""
+                        }
+                    }
+                render(){                    
+                    /*
+                    input標籤中將type屬性設為 "sumbit" = 送出表單將資料重送至指定伺服器
+                    onchange事件 = 當使用者改變後執行
+                    */
+                    return <form onSubmit={this.onSubmit.bind(this)}>
+                    
+                    Name：
+                        <input type="text" value={this.state.Name} //input = 單行輸入框標籤  //value = 值
+                            onChange={this.inputonchange.bind(this)}/>
+                        <br/>                            
+                    Player：
+                        <select value={this.state.Player} onChange={this.selectchange.bind(this)}>
+                            <option value="Player1">玩家1</option>
+                            <option value="Player2">玩家2</option>
+                        </select>
+                        <br/>
+                    ex：   
+                        <textarea value={this.state.ex} //textarea = 多行輸入框標籤
+                            onChange={this.textareaonchange.bind(this)}/>
+                        
+                        <input type="submit" value="提交"/>  
+                    </form>
+                }
+                onSubmit(e){
+                    e.preventDefault();                         //在submit事件處理器中使用 e.preventDefault() 能使表單送出時不會重整網頁
+                    console.log("表單送出")
+                    console.log("Name:"+this.state.Name)
+                    console.log("Player:"+this.state.Player)
+                    console.log("ex:"+this.state.ex)
+                }
+                inputonchange(e){
+                    this.setState({Name:e.currentTarget.value}); //currentTarget = 獲取綁定的事件
+                }
+                selectchange(e){
+                    this.setState({Player:e.currentTarget.value})
+                }
+                textareaonchange(e){
+                    this.setState({ex:e.currentTarget.value})                    
+                }
+            }
+
+            window.addEventListener("load",()=>{
+                ReactDOM.render(<Myfrom/>,document.body
+                )
+            })
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

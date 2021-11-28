@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>了解原型鍊 Prototype Chain</title>
+<script type="text/javascript">
+// 一. 原型鍊的讀取順序
+ //  建立車子物件 > 車子的原型物件 > Object原型物件(車子的原型物件的原型物件) > null(空值)
+ class Car{
+     constructor(color){
+         this.color=color;
+     }
+     run(){}
+ }
+//產生類別物件
+let car=new Car("green");
+//取得並在將原型物件顯示出來  利用getPrototypeOf取得原型物件
+let carProto=Object.getPrototypeOf(car); //car的原型物件
+console.log(carProto);
+
+//取得Object原型物件
+let objectProto=Object.getPrototypeOf(carProto);
+console.log(objectProto);
+
+//取得原型鍊的終點 : null
+let lastOne=Object.getPrototypeOf(objectProto);
+console.log(lastOne);
+
+// 二. 父類別與子類別的原型鍊應用                                          (此時 "父類別" 隸屬 "原型鍊" 中的 "第三讀取順位")
+class Car{                      //定義父類別
+    constructor(color){
+        this.color=color
+    }
+    run(){};
+}
+class ElectricCar extends Car{  //定義子類別並設定父類別為Car              (此時 "子類別" 隸屬 "原型鍊" 中的 "第二讀取順位")
+    constructor(color){
+        super(color);           //呼叫父類別
+        this.battery=100;       //設定battery屬性為:100
+    }
+    run(){};                    //父類別與子類別中都有 run方法 但因子類別為第二讀取順位 故呼叫run方法時執行子類別的run方法
+    charge(){};
+}
+let car=new ElectricCar("green"); 
+car.name="車子";       //當定義為類別建立物件後亦 "可直接使用物件帶入屬性" (此時 "帶入的屬性與方法" 隸屬 "原型鍊" 中的 "第一讀取順位")
+car.test=function(){   //也可以直接 "使用物件帶入方法"
+    console.log("建立物件後,在物件實體上增加方法")
+    console.log(this.name);
+car.charge=function(){
+    console.log(this.color) //建立物件後帶入的方法與子類別皆有 charge方法 但因是第一讀取順位 故執行建立物件後帶入的方法
+}
+}
+car.test();
+
+</script>
+</head>
+<body>
+<img src="了解原型鍊1.jpg" width="1000px" height="600px"></img>
+<img src="了解原型鍊2.jpg" width="1000px" height="600px"></img>
+</body>
+</html>

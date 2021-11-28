@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+   <div id="demo">
+      我是最外層 :　{{ user }}
+      <alert></alert>                  <!-- 第二層中包含第三層的 <myComponent> 區域元件 -->
+   </div>
+</body>
+<script>
+   const myComponent = {               // 建立一個區域元件 並放入子元件的template中
+      inject: ['user'],                // 設定接收從父元件的 user 資料
+      created() {
+         this.user.name = "uco"
+      },
+      template: 
+         `   <br>
+            我是最內層
+            取得的資料 : {{ user }}
+         `
+   }
+   const app = Vue.createApp({
+      data() {
+         return {
+            user: {
+               name: 'barry',
+               password: 'zxczxc'
+            }
+         }
+      },    
+      provide() {                      // 設定發送一個 名為 user 的資料 
+         return {
+            user: this.user
+         }
+      }
+   })
+
+   app.component('alert', {            // 此時子元件包含區域元件 <myComponent>
+      components: {
+         myComponent
+      },
+      inject: ['user'],                // 設定接收從父元件的 user 資料
+      template: 
+         `
+            <div>我是中間層
+                取得的資料 : {{ user }}
+                <myComponent></myComponent>    
+            </div>
+         `
+   })
+
+
+
+   app.mount('#demo')
+</script>
+
+</html>

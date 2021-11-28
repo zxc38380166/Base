@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>定義、呼叫靜態方法 Static</title>
+<script type="text/javascript">
+    //在 類別中,定義靜態方法 static 方法的名稱 (參數列別){內部程式碼}
+    //呼叫靜態方法 類別名稱.方法名稱(參數列表);
+    //靜態方法可以直接使用類別呼叫,但無法透過物件來呼叫
+class Car {
+    constructor(color){
+        this.color=color
+    }
+    run(){
+        console.log("car"+this.color+"Running")
+    }
+    static showColors(){  //定義一個靜態的方法
+        console.log("We support three colors: blue, red, green.");
+    }
+}
+Car.showColors();  //直接使用類別名稱.呼叫靜態方法  注意這裡的C是大寫 因為類別名稱的C是大寫
+Car.run(); //此時會錯誤,run是綁定物件的方法非靜態方法,必須由物件實體呼叫
+
+//產生新物件實體
+let carObj=new Car("blue");
+carObj.run();  //此為正確使用方式,使用物件實體呼叫物件方法
+carObj.showColors(); //此時會錯誤showColors為靜態方法並非綁定物件,無法透過綁定物件呼叫
+</script>
+</head>
+<body>
+
+</body>
+</html>

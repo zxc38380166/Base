@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+
+</head>
+<body>
+    <div id="demo">
+        <router-view></router-view>             <!-- router-view 為vouter導入的固定標籤 -->
+        <router-link to="/a">a</router-link>|   <!-- router-link 為vouter連結的按鈕 -->
+        <router-link to="/b">b</router-link>    
+    </div>
+</body>
+<script src="https://unpkg.com/vue-router@4.0.12/dist/vue-router.global.js">//router CDN</script>
+<script>
+    const componentA ={                             //新增兩個區域元件
+        template:`<div>A</div>`    
+    }
+    const componentB ={
+        template:`<div>B</div>`    
+    }
+    const app = Vue.createApp({})
+    const router = VueRouter.createRouter({         // 建立router環境 (router固定起手結構)
+        // 建立路徑模式 , 以hash的形式
+        history: VueRouter.createWebHashHistory(),
+        //建立路由
+        routes:[{   
+            path:'/a',              //建立路由的路徑
+            component:componentA    //路徑連接元件
+        },
+        {
+            path:'/b',
+            component:componentB
+        }
+    ]
+
+    })
+    app.use(router)                 //在vue中引入router (固定結構)
+    app.mount('#demo')
+</script>
+</html>

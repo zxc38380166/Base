@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>React 前端開發：快速入門範例</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script>
+            window.addEventListener("load",()=>{                            //註冊一個load事件處理器
+                let reactelement = React.createElement("h1",null,"hello");  //使用react.createElement建立一個標籤組件  裡面包含3個參數 型態=h1 屬性=null 子元件=hello
+                ReactDOM.render(        //利用ReactDOM.rener 放入htmlDOM (就像是一個容器將我們建立好的組件放進去)
+                    reactelement,document.body  //放入body內
+                );
+            });
+        </script>
+    </head>
+    <body>
+    
+    </body>
+</html>

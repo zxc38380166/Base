@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>函式的綁定物件this-基本篇</title>
+<script type="text/javascript">
+/*@
+//情況一:獨立的函式
+function test(){
+    console.log(this); //this就是window物件(整片網頁都是window物件)
+    console.log(this.innerWidth); //印出window物件的innerWidth(視窗的寬度)
+}
+test();
+*/
+
+/*@
+//情況二:物件的方法
+let obj={
+    x:3,
+    test:function(){   //test為方法
+        console.log(this);  //this就是方法所屬的物件本身  這裡因text方法隸屬於obj物件故此時的this為obj本身
+        console.log(this.x);//此時的 this.x 為 obj 物件裡面的 x 故印出 3 
+    }
+}
+obj.test();
+*/
+
+/*@
+//情況三:事件處理函式
+document.addEventListener("click",function(){
+    console.log(this);  //在事件處理函式裡的this為觸發事件的對象物件 這裡指的是document
+    this.body.innerHTML="clicked";  //this=document，innerHTML為將指定標籤(body)加上內文"clicked" 
+})
+*/
+
+//情況四:建構函式
+function Point(){
+    console.log(this);  //建構函式裡的this為瀏覽器自動幫我們建立好的空白物件 這裡指的是新建的空白物件裡有 函式point
+    this.x=3;  //this現在=空白物件  所以可以直接使用this串上屬性 之後會回傳回point
+    this.y=4
+}
+ p1=new Point();  //此時的物件中有 函式poiont 函式中有屬性x=3 y=4 利用回傳傳入p1
+console.log(p1);  //之後印出p1 故會顯示 x=3 y=4
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

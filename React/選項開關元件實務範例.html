@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>選項開關元件實務範例</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>   
+        <style type="text/css">
+        .switch{
+            width: 60px;
+            height: 30px;
+            background-color: #eeeeee;
+            border-radius: 15px;
+        }
+        .switch > .btn{
+            height: 30px;
+            width: 30px;
+            background-color: rgb(63, 65, 64);
+            border-radius: 15px;
+        }
+        .switch-on{
+            background-color: #eeeeee;
+        }
+        .switch-on > .btn{
+            background-color: rgb(9, 241, 106);
+            margin-left: 30px;
+        }
+        </style>
+        <script type="text/babel">
+        //使用者介面
+            class Switch extends React.Component{
+                constructor(props){
+                    super(props);
+                    this.state={on:false};               //初始化狀態 on:true
+                };
+                render(){
+                    let className = "switch";
+                    if(this.state.on){                  //判斷狀態若符合 on:true
+                        className+=" switch-on";        //則再加入一個名為 switch-on的className
+                    }
+                    return <div className={className} onClick={this.onclick.bind(this)}>
+                        <div className="btn"></div>
+                        </div>
+                };
+                onclick(e){                             //使用this.setState( ()=>() ) 更新狀態 {on:!currentState.on}此語法為反運算符若原先為 "false" 觸發後則反運算為 "true"
+                    this.setState((currentState)=>({on:!currentState.on}))
+            }
+        }
+        //應用程式狀態
+
+        //資料管理
+        window.addEventListener("load",()=>{
+                ReactDOM.render(<Switch/>,document.getElementById("switch-1"))  //設計好的組件可以分別放入不同的標籤內
+                ReactDOM.render(<Switch/>,document.getElementById("switch-2"))
+        })
+        </script>
+    </head>
+    <body>
+        <div id="switch-1"></div>
+        <hr/>
+        <div id="switch-2"></div>
+    </body>
+</html>

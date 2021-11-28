@@ -1,0 +1,255 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <button onclick="time()">顯示時間</button>
+    <button onclick="inner()">修改內容</button>
+    <button onclick="imag()">修改圖片連結</button>
+    <p id="time">顯示時間</p>
+    <p id="demo">顯示修改內容</p>
+    <p id="for"></p>
+    <img src="" alt="" id="imag">
+    <!-- 表單 api -->
+    <form action="">
+        <input type="number" min="100" max="300" id="form" required>
+        <button onclick="myFormApi()">myFormApi</button>
+        <button onclick="myWebApi()" type="button">myWebApi</button>
+    </form>
+    <!-- Ajax Api -->
+    <p id="ajax">點擊下方按鈕切換內容 <button type="button" onclick="myAjax()">切換</button></p>
+    <div id="json"></div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+    //顯示時間 , 並每秒更新
+    time = () => {
+        let time = document.getElementById('time')
+        time.innerHTML = Date();
+        setTimeout('time()', 1000)
+    }
+    //修改 html 內文
+    inner = () => {
+        let inner = document.getElementById('demo');
+        inner.innerHTML = "成功修改內容";
+
+    }
+    //修改 html 屬性
+    imag = () => {
+        document.getElementById('imag').src = "123.jpg";
+        document.getElementById('imag').style = "width:100px;height:100px";
+        document.getElementById('demo').style.display = "none";
+    }
+
+    //運算符
+    Calculation = () => {
+        /*
+            运算符	例子	等同于
+            =	    x = y	x = y
+            +=	    x += y	x = x + y
+            -=	    x -= y	x = x - y
+            *=	    x *= y	x = x * y
+            /=	    x /= y	x = x / y
+            %=	    x %= y	x = x % y
+        */
+        let a = 1;
+        let b = 2;
+        let c = 3
+        c++; // c + c 
+        console.log(c) //此時 c = 4
+        d = c; // c = 3 執行完 c++ 後代入 d , d則 = 4
+        if (a != 1 || b == 2 && c == 4) { // ( ||=或 )  ( !=不 ) ( &&=與 )
+            alert('符合其中一個條件')
+        }
+        let e = 5;
+        let f = 4;
+        let g = e % f; // %=取餘數  e/5=1餘1 故g = 1
+        console.log(g)
+        let h = e ** 4 // **4= e*e*e*e   e=5
+        // ==為等值 ===為等值等型 !=為不等值 !==為不等值不等型
+    };
+    Calculation();
+
+    // js中的資料類型如下
+    Datatype = () => {
+        let a = 123; // 值(number)
+        let b = "123"; // 字串(string)
+        let c = ["1", "2", "3"]; // 陣列(array)
+        var d = {
+            name: "js",
+            name1: "jq"
+        }; //物件(object)  無法使用let
+        let e = typeof (a); // typeof能夠取得資料類型
+        console.log(e) // 輸出"number"
+        let f = ""; //空值的類型 = string , 沒有值則=undefined  , 空值與沒有值並不相等
+    };
+    Datatype();
+
+    //函式(回傳值)
+    myFunction = () => {
+        let SelfIntroduction = {
+            firstName: "Chen",
+            lastName: "Barry",
+            fn: function fn(a, b) {
+                // return為將運算或執行完的代碼中的值還給函式, 達到調用時能夠取出運算或執行完的值, 亦可傳入參數在取回值
+                return "我的身高是:" + a + "我的體重是:" + b;
+            }
+        }
+        console.log(SelfIntroduction.fn(172, 68));
+        let a = document.getElementById('demo');
+        a.innerHTML = "My name is " + SelfIntroduction.firstName + SelfIntroduction.lastName + '<br>' +
+            SelfIntroduction.fn("172", "68"); //此時的 fn(1,2) 為值故可直接帶入 html元素內顯示 
+    }
+    myFunction();
+    //字符串
+    string = () => {
+        let text = {
+            name: "blue-barry",
+        }
+        console.log("barry總共有" + text.name.length + "個字") // 物件中可以使用 length 查看字符串长度
+        console.log("b第一次出現在第" + text.name.indexOf("b") + "順位") //indexOf 取得第一次出現字符串在第幾順位,0是字符串中的第一个位置，1是第二个，2是第三个
+        console.log("b最後一次出現在" + text.name.lastIndexOf("b") + "順位") // lastIndexOf 取得最後一次出現字符串在第幾順位
+        console.log("找不到c則印出" + text.name.lastIndexOf("c")) // 找不到則會印出 -1
+        console.log(text.name.search('y')) // search 與 indexof 功能一樣
+        console.log("第1到第3的字為" + text.name.slice(1, 3) + "," + //取得字串中 ' 第1順位 ~ 第3順位 '
+            "第5個字之後的字為" + text.name.slice(5) + "," + //取得字串中 ' 第5順位之後的值 '
+            "從後面算第三順位之後的字為" + text.name.slice(-3)) //取得字串中 ' 從後面開始算第3順位之後的值 '
+        console.log("將blue-barry更改為" + text.name.replace('barry', 'chen')) // replace 為將第一個字串更換為第二個字串 (只替換第一組且區分大小寫)
+        console.log("轉換為大寫" + text.name.toUpperCase()) //轉成大寫
+        console.log("轉換為小寫" + text.name.toLowerCase()) //轉成小寫
+        console.log(text.name.match(/a/.g)) //取得指定字串 , g 為全局搜索的修飾符
+        console.log("若含有blue就回傳" + text.name.includes("blue")) // 字串中含指定字串則傳送 true 反之  
+        console.log("若是blue開頭就回傳" + text.name.startsWith("blue")) // 字串中是指定字串開頭則傳送 true 反之   
+        console.log("若是barry結尾就回傳" + text.name.endsWith("barry")) // 字串中是指定字串開頭則傳送 true 反之 
+
+    }
+    string();
+
+    // 模板語法
+    template = () => {
+        let text1 = "Chen";
+        let text2 = "Barry";
+        let text3 = 2;
+        let text4 = ` ${ (text3).toFixed(5) } `; //當要同時帶入變數及函式時 變數須以()寫入  此範例函式 toFixed() 為四捨五入 並取到小數點第 5 位
+        let text = {
+            name: "blue-barry",
+            myname: ` 'chen'      
+                        "barry" `, //  模板語法支持 空白. 換行 . 單.雙引號
+            text3: `${text1}` + `${text2}` //  模板語法能夠在js直接使用變數 語法為 ${}
+        };
+        console.log("這是模板語法" + text.myname)
+        console.log("這是模板語法直接在js使用變數" + text.text3) //模板語法說明請看上方
+        console.log("使用模板語法帶入 '變數' 及 '函式' " + text4)
+    }
+    template();
+
+    //陣列
+    array = () => {
+        let name = ["barry", "chen", "uco"]
+        let name1 = ["adm", "cll", "jax", "bii", "tim"]
+        let text = "";
+        console.log("陣列中的數量有" + name.length + "個") // length  = 數量
+        let text1 = name.filter(item => item.length > 3) // filter 為過濾掉指定的值
+        console.log(text1)
+        // (forEach迴圈)
+        name.forEach((item) => {
+            text += `<div>${item}</div>`
+        })
+        document.getElementById("for").innerHTML = text
+        console.log("我們的間隔是" + name.join(" * ")) // 將陣列的值用 * 間隔開
+        name.pop();
+        name.push("show") // pop 可以刪除陣列中最後一個值 , push 可以將參數放入最後一個陣列值
+        console.log("刪除掉uco並加入show , " + name)
+        name.splice(1, 2, "zoe") // splice 可以串接陣列值 第一個參數指從索引1開始 第二個參數指從索引1開始刪除後方幾個陣列值 第三個參數指要加入得值
+        console.log("刪除掉barry後方的兩個值並加入zoe , " + name)
+        let name2 = name.concat(name1) // concat 用於將陣列連接起來
+        console.log(name2 + " = 陣列name+陣列name1")
+        let name3 = name1.slice(1, 3) // slice 用來取得指定順位值 第一個參數指開始的順位 第二個參數指結束的順位(不包括)
+        console.log(name3 + " = 取得陣列中1~3順位的值")
+        name1.sort() // sort 將所有陣列值以字母首順序排列
+        console.log(name1)
+        name1.reverse() // reverse 將陣列反轉
+        console.log(name1)
+
+    }
+    array();
+    // form Api
+    myFormApi = () => {
+        let form = document.getElementById("form")
+        console.log(api.checkValidity())
+        if (!form.checkValidity()) { // checkValidity 為判斷表單送出的數據是否有效 , 若有效則回傳true 反之
+            alert("你輸入的文字是正確的")
+        } else {
+            alert("你輸入的文字是錯誤的")
+        }
+    }
+    // web Api
+    myWebApi = () => {
+        window.history.back(); // 返回上一頁
+        window.history.go(-2); // 返回前兩頁
+        window.history.forward() // 返回下一頁
+    }
+    // Ajax
+    myAjax = () => {
+        let ajax = new XMLHttpRequest;
+        ajax.onreadystatechange = function () { // onreadystatechange 為當接收到回應後執行
+            if (this.readyState == 4 && this.status == 200) { // 設定準備狀態碼為 4 及接收狀態碼為200
+                document.getElementById("ajax").innerHTML = ajax.responseText
+                alert("切換成功")
+            }
+        }
+        ajax.open("get", "http://127.0.0.1:8887/latest.html") // 第一個參數 method:请求类型 GET或POST , 第二個參數 url:文件位置
+        ajax.send()
+    }
+
+    // Json
+    myJson = () => {
+        let obj = {
+            name: "uco",
+            name1: "sp"
+        }
+        let obj1 = '{"name":"ci","name1":"ai"}';
+        let jsonObj = JSON.stringify(obj); // JSON.stringify 將js檔轉換成 json字串
+        let jsObj = JSON.parse(obj1) // JSON.parse 將json轉換成 js物件
+        console.log("我是json字串 " + jsonObj)
+        console.log("我是js物件 " + jsObj)
+    }
+    myJson();
+    // jsonAndAjax
+    jsonAndAjax = () => {
+        let ajax = new XMLHttpRequest;
+        ajax.onreadystatechange = function () { // onreadystatechange 為當接收到回應後執行
+            if (this.readyState == 4 && this.status == 200) { // 設定準備狀態碼為 4 及接收狀態碼為200
+                let text = ""
+                let data = JSON.parse(this.responseText) // 利用 json.parse 將 json字串 轉換成 js字串
+                console.log(data)
+                data.forEach(
+                    (item) => {
+                        text += `<div>
+                                            <h3>鄉鎮名:${item.鄉鎮市}</h3>
+                                            <p>站名:${item.站名}</p>
+                                            <p>經度:${item.經度}</p>
+                                            <p>緯度:${item.緯度}</p>
+                                            <p>觀測原理:${item.觀測原理}</p>
+                                        </div> `
+                    }
+                )
+                document.getElementById("json").innerHTML = text
+                alert("切換成功")
+            }
+        }
+        ajax.open("get", "http://127.0.0.1:8887/json1.json") // 第一個參數 method:请求类型 GET或POST , 第二個參數 url:文件位置
+        ajax.send()
+    }
+    jsonAndAjax();
+    ar = () => {
+        let text = ["si", "swe", "ahth"]
+        let text2 = text.filter(item => item.length > 3)
+        console.log(text2)
+    }
+    ar();
+</script>
+
+</html>

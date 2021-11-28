@@ -1,0 +1,35 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>js聚焦放大特效</title>
+<script type="text/javascript">
+function show(){
+    var box=document.getElementById("box");   //取得id名為box的標籤並宣告進box內
+    var styles=window.getComputedStyle(box);  //window.getComputedStyle為取得當前的尺寸設定(box參數則為要取得標籤名)
+    var size=styles.getPropertyValue("width");//styles.getPropertyValue為要取得styles內的哪一個屬性(width參數則為要取得的屬性名)
+    size=parseInt(size); //因為取得的屬性為 "100px" 目前為字串(不方便使用)，故使用 parseInt 將字串轉換為數字會得到 "100"
+    
+    var animeId=window.setInterval(function(){  //window.setInterval為排程20為每0.02秒執行一次我們提供的"函式"
+      //設定一個停止條件
+      if(size>=200){  //當sizr >=200 時執行以下函式
+          window.clearInterval(animeId);  //clearInterval為清除排程(animeId參數為要清除的排程名稱)
+      }
+      //先調整數值
+      size++;  //每0.02秒size+1
+      box.style.width=size+"px"; //把數值放進box的css設定中產生實際效果
+      box.style.height=size+"px";//也可以將取得的數值放進其他css屬性內
+    },20)  //window.setInterval為排程20為每0.02秒執行一次我們提供的"函式"
+}
+</script>
+<style type="text/css">
+.box {
+    width:100px;height:100px;background-color: red;
+    position:fixed;top:0px;right:0px;   /*position:fixed為設定為絕對定位(滾動時依然是在定位點) 並設置與 與上方間距為0px 與右方間距為0px */
+}
+</style>
+</head>
+<body>
+    <div class="box" id="box" onclick="show();"></div>
+   
+</body>
+</html>

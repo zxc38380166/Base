@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>canvas繪圖-基本</title>
+<meta charset="utf-8"></meta>
+<script type="text/javascript">
+  onload=function(){  //onload=function 為載入網頁後自動使用此函式
+  //填滿的繪圖方式
+  var cvs=document.getElementById("cvs");  //取得名為cvs的id
+  var ctx=cvs.getContext("2d");            //getContext為取得cvs的物件且設定為/2d繪圖
+  ctx.fillStyle="red";                     //fillStyle設定填滿的樣式為 "紅色"
+  ctx.globalAlpha="0.5";                   //globalAlpha為設定透明度為0.5  (0=全透明，1=不透明)
+  ctx.fillRect(50, 55, 150, 100);          //fillRect為填滿一個方形的區塊 X座標為50 Y座標為55 寬為150 高為100
+  //描邊的繪圖方式
+  ctx.globalAlppha="1";       //globalAlppha為將透明度從0.5設定回1
+  ctx.strokeStyle="blue";     //strokeStyle為將描邊樣式設定為藍色
+  ctx.strokeRect(200, 450, 50, 100); //strokeRect為建立一個方形物件 x座標=200 y座標=450 寬度=50 高度=100
+  //路徑的繪圖方式
+  ctx.beginPath();       //開啟路徑
+  ctx.moveTo(200,100);   //設定1號位置
+  ctx.lineTo(300,500)    //從1號位置移動到2號位置
+  ctx.closePath();       //關閉路徑
+  ctx.stroke();          //將所有位置以描邊的方式繪圖
+  //練習繪製出一個綠色的三角形
+  ctx.fillStyle="green"; 
+  ctx.beginPath();       //開啟路徑
+  ctx.moveTo(300,200);   //設定1號位置
+  ctx.lineTo(150,155);   //設定2號位置
+  ctx.lineTo(300,500);   //設定3號位置
+  ctx.closePath();       //關閉路徑
+  ctx.fill();         //已填滿的方式繪圖
+}
+
+
+</script>
+<style type="text/css">
+.cvs {
+border:1px solid #000000;  /*設定一個黑色像素1的粗體邊框*/
+}
+
+</style>
+</head>
+<body>
+    <canvas id="cvs" class="cvs" width="800" height="600" ></canvas> <!--canvas為html的一個元素，可以使用js或其他腳本來配合做繪圖，此例為設定一個寬度800高度600的繪圖區-->
+</body>
+</html>

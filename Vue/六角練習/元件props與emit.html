@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+   <div id="demo">{{ text }}
+      <alert :imgurl="imgurl" :size="size" @emitdata="getdata"></alert>
+   </div>
+</body>
+<script>
+   const app = Vue.createApp({
+      data() {
+         return {
+            text: "外部資料",
+            imgurl: "薯條.jpg",
+            size: {
+               width: "150px",
+               height: "100px",
+            }
+         }
+      },
+      methods: {
+         getdata(text) { //傳入的參數為外部傳入的
+            console.log('this.text')
+            this.text = text
+         },
+      },
+   })
+   app.component('alert', {
+      data() {
+         return {
+            text: "內部資料",
+         }
+      },
+      methods: {
+         emit() {
+            console.log(this.text)
+            this.$emit('emitdata', this.text) //自訂一個事件名 , 並在第二個參數放入 要傳遞的資料
+         },
+      },
+      props: ['imgurl', 'size'], //增加兩個屬性名
+      template: //將html結構中原本屬姓名套上我們自己增加的屬性名,並從渲染時加上屬性
+         `
+         <div class="mycomponet"> 
+            <img :src="imgurl" :style="size"></img>   
+            <button @click="emit"> {{ text }} </button>  
+         </div>
+         `
+   })
+
+   app.mount('#demo')
+</script>
+
+</html>

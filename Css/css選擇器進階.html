@@ -1,0 +1,85 @@
+<html>
+ <head>
+  <meta charset="utf-8" ></meta>
+  <title>css選擇器進階</title>
+  <style type="text/css">
+  /* 標籤名稱選擇器 */                      /* 標籤名稱選擇器得標籤名稱前面不必加上. */ 
+  body{                                     /* 直接宣告body套用宣告的格式 */
+  font-size:25px;font-family:"微軟正黑體"
+  }
+  h3{
+  font-size:20px;text-decoration:underline  /* 直接宣告h3套用宣告的格式 */ 
+  }
+  
+  /* class選擇器 */     /* 直接宣告class屬性套用宣告的格式 */
+  
+  div.content{          /* 使用標籤選擇器+class選擇器直接宣告div標籤內的class屬性套用宣告的格式 */
+  padding:10px;border:1px dashed #888888;
+  }
+  
+  /* id選擇器 */        /* 直接宣告id屬性套用宣告得格式 */
+  
+  #btn{                 /* 直接宣告id屬性上使用btn標籤套用宣告的格式 */
+  border:1px solid #888888;
+  background-color:#ffffff;padding:5px;
+  }
+  
+  /* 虛擬選擇器 : 搭配其他選擇器使用 */
+  /* :hover 虛擬選擇器 : 當鼠標移動到標籤位置時套用設定格式 */
+  
+  #btn:hover{
+  background-color:0000ff;
+  }
+  
+  /* :focus 虛擬選擇器 : 當目標取得焦點時套用設定格式(無法使用待查證) */
+  
+  input:focus{
+  border:2px solid #ff0000;
+  }
+  
+  /* 階層式選擇器 : 搭配其他選擇器使用 */
+  /* .content為選擇器1，a為選擇器2，選擇器2必須在選擇器1的內部才可用  */
+  
+  .content a{
+   color:green;
+  }
+  .demo a{
+   color:blue;
+   }
+   
+  
+</style>
+</head>
+ <body>
+  <h3>我的自我介紹</h3>
+  <div class="content">
+  大家好，我叫做守裴
+  </div>
+  <h3>我的個人社群連結</h3>
+  
+  <ul class="content">
+   <li><a href="http://facebook.com.tw">facebook</a></li>
+  </ul>
+  <h3>我的個人社群連結2</h3>
+  
+  <ul class="demo">
+   <li><a href="http://google.com.tw">google</a></li>
+  </ul>
+  <h3>和我連絡</h3>
+  <div class="content">
+      填寫訊息 <input type="text" /> <button id="btn">送出</button>  <!--input type="text"為可輸入文字的單行欄位，button id="btn"設置一個按鈕(多數用於啟動JavaScript)-->
+  </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </body>
+
+
+
+
+
+</html>

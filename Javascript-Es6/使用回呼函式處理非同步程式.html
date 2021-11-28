@@ -1,0 +1,42 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>使用回呼函式處理非同步程式</title>
+<script type="text/javascript">
+
+function getData(callback){
+    // 2.準備做Ajax連線
+    let req=new XMLHttpRequest();
+    req.open("get","data.txt");
+    req.onload=function(){
+        // 5.等待一段時間後【子程式】完成連線,觸發【主程式】load事件,取得資料
+        // 6.呼叫callback,即透過參數傳入的 showData函式
+        callback(this.responseText);
+    }
+    req.send();// 3.送出連線【建立子程式】進行非同步處理
+    // 4.【主程式】立刻結束函式,回傳undefined
+}
+function showData(result){
+    alert(result); // 7.可以從result取得連線後得到的資料
+};
+getData(showData); // 1.呼叫取資料用的函式,並經showData函式透過參數傳入
+
+//實際演練
+function getData(cb){
+    let req=new XMLHttpRequest();
+    req.open(get,"https://traning.pada-x.com/resources/javascript-es6-react/data.out")
+    req.onload=function(){
+        cb(this.responseText);  //responseText一般用來回傳server的html.json.xml.csv
+    }
+    req.send();
+}
+function show(result){  
+    alert(result);  //利用參數帶入result並alert
+}
+getData(show);  //cb取得資料後利用參數傳入此呼叫,但因參數為函式show故再將此結果傳入函式show中,show為alert參數,便可將取得的資料在【主程式】alert出來
+</script>
+</head>
+<body>
+
+</body>
+</html>

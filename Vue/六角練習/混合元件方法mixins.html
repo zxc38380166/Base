@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+<body>
+    <div id="demo">
+        <alert2></alert2>
+    </div>
+</body>
+<script>                    // mixins 能將其他元件的資料及方法帶入
+    const alert1 = {
+        data() {
+            return {
+                name:"barry"
+            }
+        },
+        created() {
+            console.log("alert1的生命週期")
+        },
+    }
+
+    const alert3 = {
+        data() {
+            return {
+                name:"ucoco"
+            }
+        },
+        created() {
+            console.log("alert3的生命週期");
+            this.name+="ice"
+        },
+    }
+
+    const app = Vue.createApp({})
+    app.component('alert2',{
+        created(){
+            console.log("alert2的生命週期",this.name)   // 此時以共用其他區域元件資料 故可以直接讀取其他區域元件的資料
+        },
+        template:
+        `
+        <div>{{ name }}</div>
+        `,
+        mixins:[alert1,alert3]              // 建立一個 mixins 陣列存儲區域變數中的資料供自身元件共用
+    })
+
+    
+    app.mount('#demo')
+</script>
+</html>

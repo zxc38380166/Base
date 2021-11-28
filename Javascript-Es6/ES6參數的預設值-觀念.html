@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>ES6參數的預設值-觀念</title>
+<script type="text/javascript">
+//傳統函式寫法
+    function show(message){
+    if(typeof message==="undefined"){  //偵測參數若是undefined則
+              message="預設值"         //執行 "message" 設定為預設值
+    }
+    alert(message); 
+}
+show("hello"); //有設定參數則顯示 "hello"
+show();   //沒設定參數則顯示預設值
+
+//ES6函式寫法
+show=(message="預設值")=>{   //直接在參數後方加上 ="想要的預設值"
+    alert(message);
+}
+show("hello"); //有設定參數則顯示 "hello"
+show();        //沒設定參數則顯示預設值
+
+//延伸範例
+function add(n1,n2=1){   //傳統寫法
+    return n1*n2;
+}
+add(3,4); //回傳12
+add(5);   //值設定了n1故n2為預設值 則=5*1
+
+let abc=(n1,n2=1)=>(n1*n2);  //ES6寫法
+abc(3,4); //回傳12
+abc(5)    //值設定了n1故n2為預設值 則=5*1
+
+//延伸範例2
+name=(first="chen" , last="wang" , name=first+" "+last)=>{ //first為姓 last為名 name為 姓 +" "+ 名
+    alert(name);
+}
+name("wu","coco"); //顯示wu coco    (兩個參數皆設定)
+name("shou")       //顯示shou wang  (只設定第一個參數 故 後參數為 "預設值" )
+name();            //顯示chen wang  (兩個參數皆沒設定 故 皆顯示為 "預設值" )
+</script>
+</head>
+<body>
+
+</body>
+</html>

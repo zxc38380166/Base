@@ -1,0 +1,20 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>動態事件處理</title>
+<script type="text/javascript">
+    //用js的程式，動態的註冊事件處理器
+function init(){
+    var btn=document.getElementById("btn");  //自動搜尋document內id為btn的物件 且把它宣告進變數btn內
+    btn.onclick=function(){   //onclick為當點擊btn後執行後面函式 函式本體為alert("clicked")故點擊後畫面跳出clicked
+        alert("clicked")  //以上此寫法為動態處理器寫法
+    };
+}
+</script>    
+</head>    
+<body>
+
+<body onload="init();">
+    <button id="btn">Click</button>  <!--onload事件為若body打開載入後則執行 init()函式-->
+</body>
+</html>

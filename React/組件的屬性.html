@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>組件的屬性</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script>
+            /*
+            組件屬性 : 給我們的組件初始設定,一般來講建立後不會在變動   ex.   <a href=""></a>    //a 標籤中的 href就 = 他的屬性 
+            建立組件實體時,設定屬性物件  //屬性稱為 props
+            在組件的方法中使用屬性物件
+            
+            class 組件類別名稱 extends React.Component{
+                render{
+                    this.props;   //使用this.props取的屬性物件
+                }
+            }
+            */
+
+            //實際演練如下
+            class Myhead extends React.Component{
+                render(){
+                    console.log(this.props.level);  //建立組件實體時給定屬性 則可以在定義的時候去使用外部賦予的屬性
+                    return React.createElement("h"+this.props.level,null,"hello");   //利用賦予的屬性 來達到Element的彈性
+                }
+            }
+
+            window.addEventListener("load",()=>{
+                let myComponent = React.createElement(Myhead, {level:"4"} );  //建立自訂的React組件實體 ,給定屬性 {level:3}
+                ReactDOM.render(myComponent,document.body);
+            })
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

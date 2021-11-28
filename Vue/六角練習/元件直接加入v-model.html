@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="demo">{{ name }}
+        <alert v-model:text="name"></alert> <br> {{ text1 }} {{ text2 }}
+        <alert2 v-model:t1="text1" v-model:t2="text2"></alert2>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                name: "barry",
+                text1: "zxc",
+                text2: "asd"
+            }
+        },
+    })
+    app.component('alert', { //範例一 單個雙向綁定
+        props: ['text'],
+        template: // 使用 @input 事件 使用 $emit() 並使用 'update:text' 帶入屬姓名 及 $event.target.value 輸入得值 此方式會回傳結果回name以此達到雙向綁定
+            `
+            <input type="text" :value="text"
+            @input=" $emit ( 'update:text' , $event.target.value )"
+            ></input>
+        `
+    })
+
+    app.component('alert2', { //範例二 多個元件v-model雙向綁定
+        props: ['t1', 't2'],
+        template: // 使用 @input 事件 使用 $emit() 並使用 'update:text' 帶入屬姓名 及 $event.target.value 輸入得值 此方式會回傳結果回name以此達到雙向綁定
+            `
+            <input type="text" :value="t1" @input="$emit('update:t1',$event.target.value)"></input> 
+            <input type="text" :value="t2" @input="$emit('update:t2',$event.target.value)"></input>
+        `
+    })
+    app.mount('#demo')
+</script>
+
+</html>

@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="utf-8"></meta>
+    <title>json</title>
+    <script type="text/javascript">
+    /*
+    建立物件一般寫法如下
+    var point=new Object();  //建立一個新物件放進變數point裡
+    point.x=3;   //將物件的屬性x設定為3
+    point.y=4;   //將物件的屬性y設定為4
+    point.get=function(){
+    alert(this.x+","+this.y);
+    }
+    */
+    //json物件寫法如下
+    var point={  //宣告point {}=物件
+        "x":3,   //括號內x.y為物件的成員:3為屬性
+        "y":4,   //
+        "get":function(){  //get為方法
+            alert(this.x+","+this.y);
+        }
+    }
+    point.get(); //執行point的方法
+    console.log(point);           //將整個point物件的結果放至網頁的console裡(可以從網頁偵錯)
+    
+    var abc=JSON.stringify(point);//JSON.stringify為利用json將物件轉換成純字串
+    console.log(abc);             //此時abc內部的point為純字串
+    
+    var aaa=JSON.parse(abc);      //JSON.pars為利用json將字串再重新轉換成物件
+    console.log(aaa);             //此時aaa內部的abc為物件
+    
+    //使用json中的轉換JSON.stringify與JSON.parse 雖然可將物件與字串任意轉換但會忽略函式(這裡指的是get方法的函式)
+    
+    </script>
+    
+</head>
+<body>
+</body>
+</html>

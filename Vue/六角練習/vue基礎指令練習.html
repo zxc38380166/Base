@@ -1,0 +1,263 @@
+<html>
+
+<head>
+   <meta charset="utf-8">
+   </meta>
+   <title>vue 練習</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+
+<body>
+   <div id="app">
+      <template v-for="(item,key) in acc" v-bind:key="item.name">
+         <div>
+            <img v-if="item.price >=40" v-bind:src="item.imgurl"> <!-- v-bind: 能夠直接將 vue 資料帶入html屬性 -->
+         </div>
+         <div><input type="checkbox"> 我要這個</div> <!-- checkbox 可以將input設定為布林值切換 -->
+         <div v-if="item.price >=40">
+            <!-- 判斷item.price > 40的才顯示 可樂則被隱藏 -->
+            餐點:{{item.name}} <br> 價錢:{{item.price}}
+         </div>
+      </template>
+
+      <div>
+         <img v-bind:src="`${counter.imgurl}&w=${imagesize}`"></img> <br> <!-- v-bind: 能夠直接將 vue 資料帶入html屬性 -->
+         <input type="range" min="100" max="1000" v-model="imagesize"> <!-- 拖拉條 -->
+      </div>
+
+      <!-- 以下寫法為3元運算子 若 dynamic = dynamic 則顯示disabled , 若 dynamic = disabled 則顯示readonly -->
+      <button type="button"
+         v-on:click="dynamic = dynamic === 'disabled' ? 'readonly': 'disabled' ">切換{{ dynamic }}</button>
+      <input type="text" value="name" :[dynamic]> </input>
+      <!--動態切換屬性-->
+
+      <!-- key值是對應classname , 物件的值則是判斷式(true false) -->
+      <div class="box" :class="{ 'rotate':isTransform , 'box-color':boxcolor }"></div> <!-- 使用單一資料加入 class -->
+      <div class="box" :class='obj1'></div> <!-- 使用物件加入 class -->
+      <button type="button" v-on:click="change2('isTransform')">切換</button>
+      <button type="button" v-on:click="change2('boxcolor')">切換</button>
+      <!-- 帶入屬性 -->
+      <button type="button" class="box" :style="{ backgroundColor:'red' }"></button> <!-- 使用單一資料加入 style -->
+      <button type="button" class="box" :style="obj2"></button> <!-- 使用物件加入 style -->
+      <button type="button" class="box" :style="[obj2,obj3]"></button> <!-- 適用陣列加入 style 意指將一個陣列 加入物件 再將陣列帶入 -->
+      <!-- v-model 雙向綁定 複選框 -->
+      <input type="checkbox" v-model="textt11" true-value="吃飽了" false-value="還沒">
+      <textarea name="" id="" cols="30" rows="10" v-model="textt11">{{ textt11 }}</textarea>
+      <!-- 當兩個欄位綁定同一個v-model則兩邊資料修改都會連動 -->
+      <hr>
+      <!-- v-model 雙向綁定 單選框 -->
+      <input type="radio" name="" id="" ut="" value="蛋餅" v-model="radio">蛋餅</input> <!-- 單選框的資料是以複寫的方式帶入 -->
+      <input type="radio" name="" id="" ut="" value="漢堡" v-model="radio">漢堡</input>
+      <hr>
+      <!-- v-model 雙向綁定 滾動式選框 -->
+      <select name="" id="" v-model="sselect2" multiple>
+         <!-- 雙向綁定亦可綁定陣列 -->
+         <option value="" disabled>你想要吃甚麼</option> <!-- disabled 能讓選項禁選以此達到必選 -->
+         <option :value="item.name" v-for=" item in acc " :key="item.name">{{ item.name }} / {{ item.price }} 元</option>
+         <!-- 當母元素綁定陣列後 , 子元素的資料都會存放在陣列中 -->
+      </select>{{ sselect2 }}
+      <hr>
+      <!-- v-model修飾符 Lazy . Number . Trim -->
+      <input type="text" v-model="sselect1.Lazy"></input>
+      <!--當滑鼠點擊其他位置或是送出時才會同步資料-->
+      <input type="text" v-model="sselect1.Number"></input> <!-- 只會顯示數字資料 -->
+      <input type="text" v-model="sselect1.Trim"></input> <!-- 將前後的空白刪除 -->
+      <hr>
+      <!-- 事件觸發 v-on -->
+      <button v-on:click="change3('isTransform')">事件觸發</button> <!-- 將 isTransform 帶入函式 , 並利用函式更改 isTransform -->
+      <input type="text" value="change事件" @change="change4()"> <!-- change事件為當滑鼠離開焦點或是送出時執行 -->
+      <form action="" v-model="name" @submit.prevent="change4()">
+         <!-- submit 事件為當表單送出後執行 -->
+         <button>送出</button>
+      </form>
+      <button @="{ mousedown:change4 , mouseup:change4 }">動態物件方法</button> <!-- 利用物件 , 動態帶入多個方法 , 此方式無法帶入參數 -->
+      <hr>
+      <!-- v-on 修飾符 -->
+      <input type="text" value="對應按鍵" @keyup.enter="change4('別名修飾')"> <!-- 對應按鍵 , 當按下enter時才執行 -->
+      <input type="text" value="對應按鍵組合" @keyup.shift.enter="change4('別名修飾')"> <!-- 對應按鍵組合 , 當按下 shift + enter 時才執行 -->
+      <div @click.right="change4()">右鍵修飾符</div> <!-- 當按下 右鍵 後才執行 -->
+      <div @click.middle="change4()">中鍵修飾符</div> <!-- 當按下 中鍵 後才執行 -->
+      <a href="#" @click.prevent="change4()">事件修飾符</a> <!-- prevent 修飾符能夠移除 html 原生的事件 故此時點擊帶有 # 字號的超連結不會回到最上方 -->
+      <!-- 當出現巢狀元素皆有事件時觸發 內層 事件則 內到外 的事件都會執行 故需要使用個別的修飾符來對應 -->
+      <div @click.stop="change4('外層')">外層
+         <!-- stop 為防止外層執行事件 -->
+         <span @click.self="change4('中層')">中層
+            <!-- self為止會觸發自己範圍內的事件   -->
+            <button @click.once="change4('內層')">內層
+               <!-- 只能觸發一次此事件 , 若須重新觸發必須重新整理 , 但外層事件依然會執行 -->
+         </span>
+      </div>
+      <!-- capture 能夠將巢狀事件改成由外到內觸發 , 修飾符較特別需要將要使用修飾符的元素都加上 , 且不能和其他修飾符同時使用 -->
+      <div @click.capture="change4('外層')">capture外層
+         <span @click.="change4('中層')">capture中層
+            <button @click.capture="change4('內層')">capture內層
+            </button>
+         </span>
+      </div>
+      <hr>
+      <!-- v-on DOM 事件處理技巧 -->
+      <input type="text" @change="change5"> <!-- 當沒有設定參數時預設則為事件本身 = e -->
+      <input type="text" @keyup="change5"> <!-- 當沒有設定參數時預設則為事件本身 = e -->
+      <!-- 購物車系統 -->
+      <div v-for="(acc,key) in acc" :key="acc+key">
+         {{ acc.name }} / {{ acc.price }} 元
+         <button @click="change8(acc)">加入購物車</button> <!-- 利用函式參數將點選的物品帶入函式中 , 再從函式將牠放入購物車的陣列 -->
+      </div>
+      <p>我的購物車 :</p>
+      <li v-for="sselect2 in sselect2">{{ sselect2.name }}</li> <!-- 渲染出購物車的內容 -->
+      <p>總金額 : {{total}}</p> <!-- 利用foreach計算出總計金額 -->
+      {{ change10(total) }}
+      <!-- 利用直接呼叫方法並帶入參數 總金額 -->
+      <hr>
+      total1 的值 {{total1}}
+      <!-- 直接呼叫 computed方法中的 total1函式並利用回傳來顯示資料 -->
+      <br>
+      <!-- 搜尋框 -->
+      搜尋框:<input type="search" v-model="search"> <!-- 雙向綁定一個空字串物件 -->
+      <li v-for="item in filteracc">
+         {{ item.name }} / {{ item.price }}
+      </li>
+      <!-- getter , setter -->
+      <input type="number" v-model="num">
+      <button type="button" @click="total1 = num">更新</button>
+      total1 的值 {{total1}}
+      sum的值 : {{ sum }}
+   </div>
+</body>
+<script>
+   Vue.createApp({
+      data() {
+         return {
+            counter: {
+               name: 5,
+               text: 6,
+               imgurl: 'https://images.unsplash.com/photo-1602526430780-782d6b1783fa?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+            },
+            imagesize: 200,
+            dynamic: 'disabled',
+            isTransform: true,
+            boxcolor: false,
+            textt11: true,
+            radio: "可樂",
+            sselect1: "",
+            sselect2: [],
+            name: "小明",
+            total: '',
+            num: 10,
+            sum: 0,
+            search: '',
+            obj1: {
+               rotate: true,
+               'box-color': true
+            },
+            obj2: {
+               backgroundColor: 'red',
+               borderWidth: '5px',
+            },
+            obj3: {
+               backgroundColor: 'blue',
+               borderWidth: '5px',
+               width: '100px'
+            },
+            acc: [{
+                  name: "漢堡",
+                  price: 40,
+                  imgurl: "漢堡.jpg"
+               },
+               {
+                  name: "薯條",
+                  price: 40,
+                  imgurl: "薯條.jpg"
+               },
+               {
+                  name: "可樂",
+                  price: 30,
+                  imgurl: "可樂.jpg"
+               },
+            ]
+         }
+      },
+      computed: {
+         total1: {
+            get() {
+               let total = 0;
+               this.sselect2.forEach(item => {
+                  total += item.price
+               });
+               return total
+            },
+            set(val) {
+               console.log(val)
+               this.sum = val * 0.8
+            }
+         },
+         filteracc() {
+            return this.acc.filter(item => {
+               return item.name.match(this.search)
+            });
+         }
+      },
+      methods: {
+         change1: function () {
+            this.isFull = !this.isFull; //當執行chang使用反指標將 isFull內部true轉為false
+         },
+         change2: function () {
+            this.boxcolor = !this.boxcolor;
+            this.isTransform = !this.isTransform;
+         },
+         change3(key) {
+            this[key] = !this[key]
+         },
+         change4(name) {
+            console.log(name + "測試用")
+         },
+         change5(e) {
+            console.log(e.target.value) //可以取的事件自身的值
+            console.log(e.keyCode) //可以取的按鍵對應的 keycode  
+            if (e.keyCode === 13) {
+               alert("你按下了enter")
+            } else if (e.keyCode === 27) {
+               alert("你按下了esc")
+            }
+         },
+         change8(acc) {
+            this.sselect2.push(acc);
+            this.change9()
+         },
+         change9() {
+            let total = 0;
+            this.sselect2.forEach(item => {
+               total += item.price
+            });
+            this.total = total;
+         },
+         change10(price) {
+            return `NT ${price}` //使用回傳值將取得的資料封裝在方法內後再送回去 , 以此達到能夠重複使用
+         }
+      }
+   }).mount('#app')
+</script>
+
+<style type="text/css">
+   .box {
+      width: 30px;
+      height: 30px;
+      background-color: blueviolet;
+   }
+
+   .box.rotate {
+      transform: rotate(45deg);
+      /* 旋轉效果 45度 */
+   }
+
+   .box-color {
+      background-color: cornflowerblue;
+   }
+
+   img {
+      width: 250px;
+      height: 250px;
+   }
+</style>
+
+</html>

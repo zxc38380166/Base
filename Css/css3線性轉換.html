@@ -1,0 +1,43 @@
+<html>   
+<head>
+<meta charset="utf-8"></meta>
+<title>css3線性轉換</title>
+<script type="text/javascript">
+</script>
+<style type="text/css">
+.box {
+width:100px;height:100px;background-color:red;
+transform:translate(100px,150px);  /*translate為位移(100px為水平位移.150px則為垂直)*/
+transform:scale(15,0.5);           /*scale為縮放15為水平,0.5為垂直*/
+transform:rotate(80deg);           /*rotate為旋轉 80deg為80度*/
+transform:skew(80deg,50deg);       /*skew為歪斜*/
+}
+
+/*設計一個立方體寫法如下*/
+.cube>.top
+{
+    width:240px;height:60px;background-color:#dddddd;  /*創建一個寬度240像素，高度60像素，且顏色為灰色的箱體*/
+    transform:skew(-45deg,0deg) translate(30px,0px)      /*使用skew歪斜及使用translate位移*/
+}
+.cube>.center{
+    width:240px;height:240px;background-color:#aaaaaa;  
+    display:inline-block;                                /*display:inline-block為顯示模式將欄位左右並排*/
+}
+.cube>.right{
+    width:60px;height:240px;background-color:#888888;
+    display:inline-block;                                /*display:inline-block為顯示模式將欄位左右並排*/
+    transform:skew(0deg,-45deg) translate(0px,-30px)     /*使用skew歪斜及使用translate位移*/
+}
+
+
+</style>
+
+</head>    
+<body>
+<div class="box"></div>    
+<div class="cube">
+    <div class="top"></div>
+    <div class="center"></div><div class="right"></div>
+</div>
+</body>
+</html>

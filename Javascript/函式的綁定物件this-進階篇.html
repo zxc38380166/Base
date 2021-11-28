@@ -1,0 +1,35 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>svg基礎</title>
+<script type="text/javascript">
+//利用bind重新綁定物件
+function test(){   
+    console.log("綁定物件",this)
+}
+test();   //將this寫在一般呼叫函式內  會取得window
+let test2=test.bind({x:3});  //利用bind回傳值得原理將x:3代替this  (此時this=x:3)
+test2();  //呼叫函式會得到x:3
+let test3=test.bind({document});
+test3();  //呼叫函式取得document
+
+//利用apply呼叫函式，可自己設定綁定物件
+function add(n1, n2){ 
+    console.log("結果",n1+n2);
+    console.log("綁定物件",this);
+}
+add(3,4);
+add.apply(document,[4,5]);   //apply寫法為直接在呼叫函式後方寫上apply  (此時綁定物件this=document)
+add.apply({x:5},[5,6]);      //{x:5}為將 綁定物件this 設定為 x:5  [5,6]為將參數設定為5,6
+
+//利用call呼叫函式，可自己設定綁定物件
+add.call({y:4},3,4);  // call 與 apply 的差異僅在參數設定那邊不同 call 是 "用傳統的直接帶入參數" 以 ","做間隔
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

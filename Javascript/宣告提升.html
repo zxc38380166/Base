@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>宣告提升Hoisting</title>
+<script type="text/javascript">
+x=10;     //設定初始資料
+alert(x); //使用變數
+var x;    //宣告變數，假設將宣告放在 "初始資料" 及 "使用變數" 後依然可以使用因為宣告變數會自動提升至上方這個行為稱為  宣告提升Hoisting
+
+alert(x);
+var x=10;//但若是在使用變數後宣告變數且一同設定初始資料為10的話因為 宣告提升只會提升 "宣告變數" 故此寫法無法正確顯示 
+
+
+abc();
+function abc(){  //函式的原理也一樣
+  alert("abc");  //此排宣告會被提升，所以將呼叫寫在函式前面依然可以執行
+}  
+
+aaa();    
+var aaa=function(){  //但若是將函式寫在宣告的變數後方，則因為只有 "變數被提升 "，變數提升後函式變成沒有設定名稱故無法正常執行
+  alert("aaa");
+} 
+</script>
+
+</head>
+
+</html>

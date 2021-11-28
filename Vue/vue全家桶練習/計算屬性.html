@@ -1,0 +1,61 @@
+<html>
+   <head>
+
+   </head>
+   <body>
+      <div id="demo">
+         姓:<input type="text" v-model="firstName">
+         名:<input type="text" v-model="listName"><br>
+         fullName1:<input type="text" v-model="fullName1"><br>
+         fullName2:<input type="text" v-model="fullName2"><br>
+         fullName3:<input type="text" v-model="fullName3"><br>
+         fullName4:<input type="checkbox" v-model="fullName4">
+      </div>
+   </body>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+   <script>
+      Vue.createApp({
+         data(){
+            return{
+               firstName:"Chen",
+               listName:"Barry",
+               fullName2:"",
+            }
+         },
+         computed:{        // computed 適合監視多個變數,若函式中的資料改變皆會重新渲染頁面
+            fullName1(){
+               return this.firstName+' '+this.listName
+            },
+            fullName3:{
+               get(){
+                  return this.firstName+' '+this.listName
+               },
+               set(n){
+                  console.log(n)
+                  const names =n.split(" ")     // split 將屬性資料以 " " 分隔後裝進陣列
+                  console.log(names[0])
+                  this.firstName=names[0]
+                  this.listName=names[1]
+               }
+            },
+            fullName4:{
+               get(){
+                  if(this.firstName==="Chen"){
+                     return true
+                  }else{
+                     return false
+                  }
+               },
+            }
+         },
+         watch:{           // watch 適合監視單一個變數
+            firstName:function(n){
+               this.fullName2=n+' '+this.listName
+            },
+            listName:function(n){
+               this.fullName2=n+' '+this.listName
+            }
+         }
+      }).mount('#demo')
+   </script>
+</html>

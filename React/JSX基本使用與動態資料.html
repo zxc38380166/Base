@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>JSX 基本使用與動態資料</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>   
+        <script type="text/babel">
+            /*
+            jsx中取代 React.createElement("head"); 寫法如下
+            let head = <myhead/>  //能夠直接將定義好的類別以html形式使用
+
+            jsx中取代帶入屬性  React.createElement("head", {level:3} )  寫法如下       
+            let head = <myhead level="3" />
+            
+            衍伸範例 原本的寫法  //classNeme可以套用在css選擇器中
+            class myhead extends React.Component{
+                render(){
+                    return React.createElement{"div", {classneme:head},"hello"+this.props.level}
+                };
+            };
+
+            window.addEventListener("load",()=>{
+                let component = React.createElement("myhead",{level:3});
+                ReactDOM.render(component,document.body);
+            });
+            
+            jsx中取代的寫法如下
+            */
+            class Myhead extends React.Component{
+                render(){
+                    return <div className="head">hello {this.props.level} </div>
+                };
+            };
+            
+            window.addEventListener("load",()=>{
+                let component = <Myhead level="3"/>
+                ReactDOM.render(
+                    component,document.body
+                );
+            });
+
+            
+            //使用jsx建立巢狀組件結構
+            class Myheadlist extends React.Component{
+                render(){
+                    return <div>
+                        <Myhead level="1"/>
+                        <Myhead level="2"/>
+                        <Myhead level="3"/>
+                        </div>
+                };
+            };
+
+            window.addEventListener("load",()=>{
+                let component = <Myheadlist/>
+                ReactDOM.render(
+                    component,document.body
+                );
+            });
+
+            //jsx表面像html 但本質更接近javascript
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

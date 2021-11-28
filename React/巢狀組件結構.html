@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>巢狀組件結構</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script>
+            /*
+            巢狀組件結構為在組件中再放入其他組件 ex. div裡面再放入h1標籤
+            React.createElement(
+                組件類別名稱,[屬性物件],[子元件]
+            )
+            */
+
+            //實際演練如下
+            class myhead extends React.Component{
+                render(){
+                    return React.createElement("h"+this.props.level,null,"hello")
+                };
+            };
+
+            class myheadlist extends React.Component{
+                render(){
+                    let heads = []                                          //創建一個陣列
+                    let head;
+                    for(let i=1 ; i<6 ; i++){                               //利用迴圈創建6個 myhead組件的屬性
+                        head = React.createElement(myhead, {level:i} );     //變數放入一個內涵myhead組件的的新組件,並帶入屬性 level:i 供myhead組件使用
+                        heads.push(head);                                   //將head變數利用push放入陣列
+                    }
+                    return React.createElement("div",null,heads)
+                }
+            }
+            window.addEventListener("load",()=>{
+                let myComponent = React.createElement(myheadlist,null );
+                ReactDOM.render(myComponent,document.body)
+            })
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

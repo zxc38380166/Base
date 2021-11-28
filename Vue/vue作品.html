@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <meta charset="utf-8"></meta>
+    <title>Vue作品</title> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      尋找你想吃的東西 : <input type="search" v-model="search" >
+      <div class="menu" v-for="sc in sc"><hr>{{ sc.name }} / NT $ {{ sc.price }} 元
+        <input type="number" min="0" :style="{width:'50px'}" >
+        <button @click="callcar(sc)">加入購物車</button>
+        <br><img :src="sc.imgurl" alt="" :style="imgsize">
+      </div>
+      <p>購物車:</p>
+      <div v-for="car in car">{{car.name}} </div>
+      <p>總金額 : {{ sum }}</p>
+
+      <input type="text" v-model="num">
+      <button type="button" @click="text = num"></button>
+
+    </div>
+  </body>
+  <script>
+    Vue.createApp({
+      data(){
+        return{
+          num:'',
+          imgsize:{     //圖片尺寸
+            width:'200px',
+            height:'150px'
+          },
+          car:[],  //購物車存放
+          sum:'',     //總金額
+          search:'',  //搜尋欄
+          menu:         //菜單
+          [
+            {
+            name:'漢堡',
+            price:50,
+            imgurl:'漢堡.jpg'
+            },
+            {
+            name:'薯條',
+            price:40,
+            imgurl:'薯條.jpg'
+            },
+            {
+            name:'可樂',
+            price:30,
+            imgurl:'可樂.jpg'
+            },
+          ],
+        }
+      },
+      methods:{
+        callcar(menu){
+          this.car.push(menu)
+          this.change9()
+        },
+        change9(){
+          let total = 0;
+          this.car.forEach(item => {
+            total+=item.price
+          });
+          this.sum=total;
+        },
+      },
+      computed:{
+        sc(){
+          return this.menu.filter(item=>{
+            return item.name.match(this.search)
+          })
+        },
+        text:{
+          get(num){
+            console.log(num)
+          }
+        }
+      },
+    }).mount('#app')
+  </script>
+</html>

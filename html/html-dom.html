@@ -1,0 +1,51 @@
+<html>
+<meta charset="utf-8"></meta>
+<head>
+<title>html-dom</title>
+<script type="text/javascript">
+alert(window.screen.width+"x"+window.screen.height); //顯示出使用者的寬(width)與高(height)意指使用者的解析度
+function change(){window.document.body.innerHTML="hello"//window.document.body為取得body標籤 innerHTML="hello"為將取得標籤的內部HTML做替代
+} 
+
+function abc(){
+   var spanObj=window.document.getElementById("emotion");//getElementById 為自動搜尋id名為emotion的標籤，後將他宣告進函式內的變數spanObj內
+   spanObj.innerHTML="bad";//將spanObj物件裡面的HTML替換成"bad"
+   spanObj.style.color="red"; //css也可以透過此方式寫入，呼叫此函式時將物件改成紅色
+   spanObj.style.fontWeight="bold";//呼叫此函式將物件改成粗體			  
+   spanObj.style.display="none"; //呼叫此函式將此物件隱藏
+} 
+
+
+
+function toggleMenu(number){ //在參數寫上number即可在不同區塊以編號方式進行使用
+  var menu=document.getElementById("menu"+number); //此時這裡則會以menu+參數(編號)下去做尋找
+  menu.classList.toggle("hide"); //當搜尋到menu1時使用toggle切換名為hide的css(意指menu1若有設定為hide則打開反之沒有設定則關閉)
+}
+
+</script>
+<style type="text/css">
+.hide{display:none;}
+</style>
+
+</head>
+<body> 
+   <div>
+     Today is a <span id="emotion">good</span> day .Les't go to movie. <!--id為將此標籤命名以利帶入函式-->
+   </div>
+  <button onclick="change();">change</button>  <!--onclick為點擊時執行=後代碼(此例為點擊後呼叫函式change)-->
+  <button onclick="abc();">change</button><!--點擊後執行abc函式-->
+   
+   <div onclick="toggleMenu(1)"><選單的標題1></div> <!--點擊後執行toggleMenu()函式-->
+    <ul id="menu1"> 
+	    <li>項目1-1</li>
+        <li>項目1-2</li>
+        <li>項目1-3</li>
+    </ul>
+<div onclick="toggleMenu(2)"><選單的標題2></div> 
+    <ul id="menu2" > 
+	    <li>項目2-1</li>
+        <li>項目2-2</li>
+        <li>項目2-3</li>
+    </ul>
+
+</html>

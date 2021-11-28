@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<script type="text/javascript">
+//建立空白物件
+new Object(); //此為空白物件
+var point=new Object(); //將一個物件宣告進變數point裡
+
+//建立物件的成員 (屬性與方法)
+point.x=3;  //物件裝的不是函式就稱為屬性
+point.y=4;  //x.y為屬性
+point.getposition=function(){//物件裝的是函式則稱為"方法" 
+    alert(this.x+","+this.y);}
+
+//使用物件(直接呼叫 屬性或方法)
+point.getposition(); 
+
+var player=new Object(); //建立一個空白物件然後宣告進變數player裡
+player.name="john"; //將"john"帶入物件name的屬性裡
+player.hp=100; //將hp帶入物件hp的屬性裡
+player.fight=function(){this.hp=this.hp-2;};  //(執行戰鬥則hp-2)
+player.rest=function(){this.hp++;};           //執行休息hp+1
+player.report=function(){alert(this.name+":"+this.hp)};//執行回報狀態則 顯示name : 顯示hp
+
+player.fight();
+player.rest();
+player.report();
+
+//建構式的函式
+function Player(name,hp){ //建構函式習慣命名首字為大寫，再將物件屬性帶進參數
+  //this 代表自動新建的空白物件
+  this.name=name; //將物件name的屬性引入參數 name這樣即可在呼叫時用修改參數的方式來修改物件屬性 (此時因為屬性引入參數故現在的參數=屬性)
+  this.hp=hp;  //將物件hp的屬性引入參數hp，效果承上
+  this.fight=function(){this.hp=this.hp-2;} //此為函式代表將物件加上方法
+  this.rest=function(){this.hp=this.hp+1;}
+  this.report=function(){alert(this.name+":"+this.hp)}
+  }; 
+var player=new Player("john",100); //呼叫建構函式後自動帶入以上屬性(建構式前面要加上new)，再將此呼叫放進變數 Player中
+player.fight();
+player.report();
+var player2=new Player("bob",80); //建構函式可以重複使用，故只需要將相同的建構函式屬性宣告進變數內即可以不同命名套用相同屬性
+player2.rest();
+player2.report();
+
+</script>
+</head>
+
+</html>

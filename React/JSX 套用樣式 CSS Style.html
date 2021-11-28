@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>JSX 套用樣式 CSS Style</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>   
+        <script type="text/babel">
+            class Myhead extends React.Component{                                         //自行定義的React組件要使用css只能透過className來帶入選擇器使用
+                render(){
+                    return <div className="head">
+                        <div style={ {color:"red"} }>hello</div>                          
+                        <div style={ {color:"blue"} }>hello</div>
+                        <div style={ {color:"green"} }>hello</div> 
+                        </div>                                                            //但自定義的組件內部若有html組件時可以使用行內屬性設定, 寫法如上
+                }
+            }
+
+            let head1 = React.createElement("div", {style:{color:"red"}} ,"hello word")   //創造組件時套用css屬性,只適用於html為組件 故此寫法能夠使用
+
+            window.addEventListener("load",()=>{
+                let head = <Myhead/>
+                ReactDOM.render(
+                    head ,document.body
+                )
+            })
+
+            
+
+        </script>
+        <style type="text/css">
+        .head{
+            background-color: aqua;
+        }
+        </style>
+    </head>
+    <body>
+
+    </body>
+</html>

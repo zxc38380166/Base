@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>我的第一個組件</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script>
+            /* 
+            組件 = 自訂的React Element   已經存在的html也是Element(ex. "h1" "div") 然而在React能夠自訂組件 // 也可以稱為自訂標籤
+            
+            第一步 定義一個組件類別 
+            class 組件類別名稱 extends React.Component{
+                組件類別內的程式碼(其中最重要的是定義render方法,代表如何繪製這一個element 如下範例)
+                render(){
+                    return React_Element //一定要回傳一個Element
+                }
+            }
+
+            第二步 建立組件的實體
+            React.createElement(  //放入3個參數分別如下
+                組件類別名稱 , 屬性物件 ,子元件
+            )
+
+            第三步 將組件實體加入畫面中
+            ReactDOM.render(
+                組件實體 , 容器元件
+            )
+            
+            */
+
+            //實際演練如下
+            class myhead extends React.Component{                       //定義組件類別,繼承父元件組件
+                render(){                                               //加入方法
+                    return React.createElement("h1",null,"hello");      //回傳一個Element 放入組件
+                };
+            };
+
+            window.addEventListener("load",()=>{                        //註冊一個load監聽處理器
+                let myComponent = React.createElement(myhead,null)     //將我們設計好的組件再放進一個Element內 (此時這個Element內含我們自己定義的組件)
+                ReactDOM.render(myComponent,document.body);            //最後將他繪製進去容器  
+            });
+
+
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>

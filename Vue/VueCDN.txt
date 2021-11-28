@@ -1,0 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>					Vue
+<script src="https://unpkg.com/vue-router@4.0.12/dist/vue-router.global.js"></script>					Vue Router
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/4.1.17/vee-validate.min.js"></script>          	vee-validate
+<script src="https://cdn.jsdelivr.net/npm/@vee-validate/i18n@4.1.17/dist/vee-validate-i18n.min.js"></script>		vee-validate-i18n
+<script src="https://cdn.jsdelivr.net/npm/@vee-validate/rules@4.1.17/dist/vee-validate-rules.min.js"></script>		vee-validate-rules

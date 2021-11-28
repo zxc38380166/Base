@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>類別與物件-觀念</title>
+<script type="text/javascript">
+//  一. 概念
+
+    // 類別 = 設計圖
+    // 物件 = 設計圖製作出來的實體
+    // 一個設計圖可以產生無數個實體
+    
+    //基本類別會用到的關鍵字 class , constructor
+    //產生物件會用到的關鍵字  new
+
+    //定義一個類別使用 class 加上類別名稱 及{}  如下
+    // class car{}
+    //利用已經定義好的類別，產生新物件 new 加上類別名稱及() 如下
+    //new car()
+    //利用 new car() 產生新物件並放進變數 car1 中  如下
+    //let car1=new car();
+   
+//  二.建構式
+ 
+    //建構式為產生新物件前執行的函式 ， 且 "一定要定義在類別之中" 
+    //定義一個類別
+    class car{
+        //在類別中，定義建構式
+        constructor(){    //constructor(){} 為特殊函式
+            console.log("建構式被呼叫");   // console印出 "呼叫建構式"
+        }
+    }    
+    //利用已經定義好的類別，產生新物件後放進變數
+    let car1=new car(); //new car() = 呼叫建構式，產生新物件
+    let car2=new car(); //new car() = 呼叫建構式，產生新物件
+
+//  三.建構式中建立物件的屬性 (用來描述物件的個別差異)
+      //寫法 三-1.不設定參數統一物件屬性
+   class car{
+       constructor(參數列表){        //執行函式後產生新物件
+           this.color="red";   //在建構式裡this代表產生的新物件，因此可以在 this. 後方加上想加上的屬性    this."屬性名稱" = "屬性值"
+       }
+   }
+   let car1=new car();  //新物件擁有 color 屬性為 red
+      //寫法 三-2.利用參數彈性設定物件屬性
+    class car{
+        constructor(color){   //設定參數為color
+          this.color=color;   //設定color(屬性) = color(設定的參數)
+        }
+     }
+     let car1=new car("red");   //此時參數red便會放入  constructor(color)內
+     let car2=new car("green"); 
+
+//  四.存取屬性並建立新的屬性
+    class car{
+        constructor(color){
+            this.color=color;
+        }
+    }     
+    let car1=new car("blue");    //將car1帶入 "blue" 參數
+    console.log(car1.color); //將car1的color屬性輸出至console   此時印出  "blur"
+    let car1=new car("red");     //將同為 car1 帶入 "red" 參數   此時覆蓋前一個參數
+    console.log(car1.color);//將car1的color屬性輸出至console   此時印出  "red"
+
+//  五.將物件 定義方法，及使用方法 (用來描述物件可以做的事 又稱 與物件綁定的函式 方法=函式組成) 
+    class car{
+        constructor(color){
+            this.color=color;
+        }
+        run(){     //將run寫在類別內 = 將函式綁定在物件，"此時只有定義方法"
+        console.log("running") 
+        }
+    }
+    let car1=new car("red");  //產生新的物件 此時 物件擁有 red屬性 及 run方法
+    car1.run();   //呼叫方法寫法為 物件名稱.方法();  此時 console 印出 "running"
+//  六.在物件方法中使用this代表綁定物件  
+    class car{
+        constructor(color){
+            this.color=color;
+        }
+        run(){
+            console.log("car"+this.color+"running")   //此時的 this 為綁定的物件 這裡代表的是 car
+        }
+    }
+    let car1=new car("red");
+    car1.run();   //此時consolr印出 "car" red "running"
+
+//  七.總結練習
+    class car{                                                      //定義類別
+        constructor(color){                                         //加入建構函式(先執行函式後建立物件)
+            this.color=color;                                       //此時 this=car 故將color屬性設定為 參數 color
+            this.speed=0;                                           //設定車子初始速度為0
+        }
+        run(speed){                                                 //加入方法
+            this.speed=speed;                                       //此時 this=car 故將speed屬性設定為 參數speed
+            console.log("car"+this.color+"running"+this.speed+km/hr)//在console印出 car + 設定的顏色參數 + running + 設定的速度參數 + km/hr
+        }
+        stop(){                                                     //再次加入方法
+            this.speed=0;                                           //將car的 speed屬性 從舊有的覆蓋為 0
+            console.log("car"+this.color+stopped)                   //印出 car + 設定的顏色參數 + stopped 
+        }
+    }
+    let car1=new car("blue");                                       //new car("blue")為建立一個新的物件 且參數設定為blue 後放入變數car1裡
+    car1.run(50);                                                   //使用run方法 並將參數設定為50 此時console印出 " car blue running 50 km/hr "
+    car1.stop();                                                    //使用stop方法 此時console印出 car blue stopped
+
+</script>
+</head>
+<body>
+ 
+ <img src="類別與物件的概念圖1.jpg" style="width: 800;height: 600;">
+ <img src="類別與物件的概念圖2.jpg" style="width: 800;height: 600;">
+ <img src="類別與物件的概念圖3.jpg" style="width: 800;height: 600;">
+ <img src="類別與物件的概念圖4.jpg" style="width: 800;height: 600;">
+</body>
+</html>

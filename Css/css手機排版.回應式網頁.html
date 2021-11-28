@@ -1,0 +1,79 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" /> <!--initial-scale=1為將縮放尺寸固定在1倍
+                                                                                            maximum-scale=1為將最大的縮放尺寸固定在1倍
+																							以上兩點為設計手機網頁排版必備-->
+  <title>css排版</title>
+  <style type="text/css">
+  .標題欄{
+  font-weight:bold;font-size:30px;background-color:green;color:white;
+  text-align:center /*此欄為將文字置中*/ ;padding:10px;
+  }
+  
+  .三大欄位{
+  width:1000px;padding:10px;margin-left:auto;margin-right:auto   
+  
+  /** width:1000px為整個三大欄位邊框寬度為1000象素，padding:10為字體間隔10象素，margin-left:auto;margin-right:auto為將左右兩側區塊間隔切齊 **/
+  
+  }	
+  
+  .欄位{
+  width:280px;padding:10px;margin:10px;background-color:white;   
+  /** width:280px為調整邊框寬度為280象素，padding:10為字體間隔10象素，margin:10為調整區塊間隔為10象素 **/
+  
+  display:inline-block;vertical-align:top;
+  /** display:inline-block為將欄位左右並排，vertical-align:top為將欄位對其上方 **/
+  text-align:center;height:150px;line-height:30px;
+  /** text-align:center指的是欄位(div)中內部的文字置中，height:150px調整欄位高度為150象素，line-height:30px為調整行高維30象素 **/
+  
+  }
+  
+
+  
+  .title{font-weight:bold;}                 /** 使用標籤選擇器將title標籤內得文字套用為粗體字 **/ 
+  @media screen and (max-width:600px)       /** 使用者使用螢幕且最大寬度小於600像素時套用宣告格式 **/
+  {.三大欄位{width:100%;text-align:center;} /** 將三大欄位內部的欄位寬度設定成100%此時每一欄位因寬度填滿手機版面故剩下版面接往下排版 **/
+   .標題欄{font-size:20px;}                 /** 若需更改手機排版僅需在此欄位做修改，以此範例為將手機排版標題欄字體大小更改為20像素 **/
+  }
+  
+  
+  </style>
+
+
+
+</head>
+
+
+
+<body style="margin:0px;background-color:#eeeeee;">  <!--margin:0px為將區塊間的間距設定為0象素，background-color:#eeeeee為將整個body顏色設定為#eeeeee色-->
+   <div class="標題欄">守裴的自我介紹</div>
+   <div class="三大欄位">
+     <div class="欄位">
+        <div class="title">我的基本資料</div>
+		<div>我是男生</div>
+		<div>我住嘉義</div>
+		<div>我愛睡覺</div>
+		
+		
+	 </div>   
+	
+	 <div class="欄位">
+        <div class="title">我的個人興趣</div>
+	 </div>
+	
+	 <div class="欄位">
+        <div class="title">歡迎與我聯絡</div>
+     </div>
+   
+   
+   
+   </div>
+   
+   
+</body>
+
+
+
+
+</html>

@@ -1,0 +1,39 @@
+<html>
+<head>
+  <meta charset="utf-8"></meta>
+  <title>CSS選擇器</title>
+  <style type="text/css">  /*須在文章內使用相同格式可用以下形式宣告內容，需要使用時輸入宣告的名稱 EX .字體(宣告名稱前必須加上.)
+                            使用時需對應在class後方加上宣告名稱*/
+  .字體-粗體及20大小{font-weight:bold;font-size:20px}
+  .邊框高200寬度400字體邊框間距粗細1虛線藍邊文字上間距10下間距10{height:200;width:400;padding:10px;border:1px dashed blue;margin-top:10px;margin-bottom:10px;}
+  .以下字體為紅字{color:red}
+  .箱體{position:absolute;left:200px;top:50px;  
+        width:100px;height:200px;background-color:blue}
+  /*position:absolute為絕對定位它的位置 left為從左邊過來200像素 top為從上下來50像素*/
+  </style>
+</head>
+<body>
+  <div class="字體-粗體及20大小">今天天氣不錯</div>                               <!--style為字體的函數，
+                                                                   font-weight:bold為字體設定粗體
+																   font-size:20px為將字體大小設定成20個像素--> 
+  
+  <div class="邊框高200寬度400字體邊框間距粗細1虛線藍邊文字上間距10下間距10">
+          	  我去公園散步，餵<span class="以下字體為紅字">鴿子</span>。<br/>
+			  覺得鴿子好可愛喔
+  </div>
+  <div class="箱體"></div>
+                                                                     <!--style="color:red"為將特定字體轉換紅色
+                                                                   span為以不換行的方式設定字體顏色
+																   margin為調整區塊間的距離-top:10px上方調整10像素距離，bottom則為下方
+																   border:1px為邊框粗細為1象素 solid為實線邊框 blue為邊框顏色 dashed為虛線
+																   padding:10px為字體與邊框間距為10個像素
+																   height:200為調整邊框高度為200像素 width:400為調整邊框寬度為400像素
+																   以上設定皆僅適用於div標籤或區塊性標籤內-->																   
+  
+
+  
+  <div style="width:100px;height:200px;background-color:green"></div> <!--background-color:green為做出一個綠色箱體-->
+  <div style="font-weight:bold;font-size:30px">我今天和爸爸<span style="position:relative;top:-15px">2</span>跟媽媽出去吃飯</div> 
+
+</body>
+</html>  

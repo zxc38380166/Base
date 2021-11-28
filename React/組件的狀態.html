@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>組件的狀態</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script>
+            /*
+            組件的屬性是建立後不會變動 , 組件的狀態則是建立後能夠變動
+            class 組件類別名稱 extends React.Component{
+                constructor(props){     //constructor為建構式,意指建立物件前執行的函式
+                    super(props);       //一定要先呼叫父類別的建構式 這是規矩
+                    this.state={};      //建立一個state狀態屬性並初始化 若需放入資料也可以寫入 ex. this.state={data:10}
+                }
+            }
+            
+            若需更新狀態一定只能呼叫 setState(新的組件狀態);
+            class 組件類別名稱 extends React.Component{
+                update(){               //update()是我們隨興建立的測試用方法
+                    this.setState( {data:"新的資料"} )  //使用setState(狀態物件)來更新狀態
+                }                       //【禁止】直接更新物件 ex. thisi.state={data:"新的資料"}
+            }
+
+            更新狀態,與目前的狀態有關聯
+            setState( (目前狀態,目前屬性) => (新的狀態) );
+            class 組件類別名稱 extends React.Component{
+                update(){
+                    this.setState( (currentState,currentProps)=>(
+                        {data:currentState.data+1} ) 
+                    )
+                }
+            }
+
+            更新狀態會自動呼叫 render() 並重繪畫面 
+            
+            */
+
+            class myhead extends React.Component{
+                render(){
+                    return React.createElement("h"+this.props.level,null,"hello")
+                };
+            };
+
+            class myheadlist extends React.Component{
+                constructor(props){                     //constructor = 建立建構函式
+                    super(props)                        //必須先呼叫父類別建構函式並帶入參數
+                    this.state = {maxlevel:3}           //建立新的狀態
+                    setTimeout(()=>{
+                        this.setState({maxlevel:6})     //更新狀態
+                    },1000)
+                }
+                render(){
+                    let heads = []
+                    let head ;
+                    for ( let i=1 ; i<this.state.maxlevel ; i++ ){      //狀態與屬性都 = 屬性  差別在於狀態一般希望能夠動態改變 , 但屬性一般希望建立後不改變
+                        head = React.createElement(myhead, {level:i} );
+                        heads.push(head);
+                    };
+                    return React.createElement("div",null,heads);
+                };
+            };
+
+            window.addEventListener("load",()=>{
+                let myComponent = React.createElement(myheadlist,null);
+                ReactDOM.render(myComponent,document.body)
+            })
+
+            
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

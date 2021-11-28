@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+</head>
+<body>
+    <div id="demo">
+        <alert>
+            <template #thead>我是頭部</template>
+            <template #default>
+                <div>
+                    我是身體
+                </div>
+            </template>
+            <template #tfoot>
+                <h2>我是尾部</h2>
+            </template>
+        </alert>
+        <alert1></alert1>
+
+    </div>
+</body>
+<script type="module">
+    import 'https://unpkg.com/mitt/dist/mitt.umd.js'            // 載入 emit 套件
+    const emitter = mitt()                                      // 製作一個發收器
+    const app = Vue.createApp({
+        data() {
+            return {
+            }
+        },
+    })
+    
+    app.component('alert',{
+        data() {
+            return {
+                name:{
+                    name:"barry",
+                    name1:"uco"
+                }
+            }
+        },
+        methods: {
+            senData(){
+                console.log("senData")
+                emitter.emit('senData',this.name)               // 使用發收器的 emit() 發出資料
+            }
+        },
+        template:   // slot標籤為開放插槽讓html可以直接做更改或插入資料,若是沒有定義name則可以設定預設值
+            `
+            <div>
+                <slot name="thead"></slot>
+            </div>
+            <slot>我是身體(這是預設文字)</slot>  
+            <slot name="tfoot"></slot>
+            <button @click="senData">傳送</button>
+            `
+    })
+
+    app.component('alert1',{
+        data() {
+            return {
+                item:{},
+            }
+        },
+        created() {
+            emitter.on('senData',(item)=>{                      // 使用發收器的 on() 接收資料
+                console.log("emitter.on",item)
+                this.item=item                            // 將收到別的元件資料放進自身元件的資料
+            })
+        },
+        template:   
+            `
+            <div>
+                {{ item }}
+            </div>
+
+            `
+    })
+    app.mount('#demo')
+</script>
+</html>

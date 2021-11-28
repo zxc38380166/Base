@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>事件處理 Event Handling</title>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>   
+        <script type="text/babel">
+            class Myhead extends React.Component{ 
+                constructor(props){
+                    super(props)
+                    this.state={color:"red"}
+                }       
+                render(){                               //定義組件類別的屬性時可以在屬性中再帶入繪製畫面時帶入的屬性 如下
+                    return <div 
+                    className={"head"+this.props.level} 
+                    style={{color:this.state.color}}
+                    onClick={this.clickHandler.bind(this)} //bind可以將定義組件類別時創造的屬性綁定至物件上提供外部讀取
+                    onMouseOver={this.mouseOverHandler.bind(this)}
+                    onMouseOut={this.mouseOutHandler.bind(this)}
+                    > 
+                    hello</div> //定義組件類別屬性也可以在屬性帶入建構式中設置的 props 或 state
+                }   
+                mouseOutHandler(){
+                    this.setState({color:"yellow"})
+                }
+                mouseOverHandler(){
+                    this.setState({color:"green"})
+                }
+                clickHandler(){
+                    alert(this.state.color)       //因為有設定bind所以可以從外部讀取定義組件類別中的 props 跟state
+                    this.setState({color:"blue"}) //因此能夠從外部以更新狀態的方式手動更改內部的 state
+                }
+            }
+
+            window.addEventListener("load",()=>{
+                ReactDOM.render(
+                    <Myhead level="3"/>,document.body    //將組件繪製到畫面時可以將屬性帶入 並讓定義組件類別時能夠讀取使用
+                )
+            })
+        </script>
+        <style type="text/css">
+        .head3{
+            background-color: wheat;
+        }
+        </style>
+    </head>
+    <body>
+
+    </body>
+</html>

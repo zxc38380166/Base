@@ -1,0 +1,35 @@
+<html>
+<head>
+ <meta charset="utf-8"></meta>
+ <title>靜態事件處理</title> 
+ <script type="text/javascript">
+ function over(element){
+element.style.color="red";   //執行此函式時使用css將文字顏色更改為紅色
+
+ }
+ 
+ function out(element){
+element.style.color="black"; //執行此函式時使用css將文字顏色更改為黑色
+
+ }
+ 
+ </script>
+</head>
+<body>
+<button onclick="alert('Clicked');">Click </button>  <!--點擊後執行alert('Clicked')-->
+<!--onmouseover為當滑鼠移到此目標時執行=後程式碼-->
+<!--onmouseoout為當滑鼠離開此目標時執行=後程式碼-->
+<span onmouseover="this.style.color='red';"       
+      onmouseout="this.style.color='black';">test</span>
+
+ <!--同上功能採用javascript的方式來寫如下-->>
+ <!--onmouseover為當滑鼠移到此目標時執行函式over(this)-->
+ <!--onmouseoout為當滑鼠離開此目標時執行函式out(this)-->
+<span onmouseover="over(this);"       
+      onmouseout="out(this);">test</span>
+<div onmouseover="over(this);"       
+     onmouseout="out(this);">line2</div>
+
+
+    </body>
+</html>   

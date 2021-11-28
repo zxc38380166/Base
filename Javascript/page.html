@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta charset="utf-8"><meta>
+    
+  <title>ajax</title>
+ 
+  <script type="text/javascript">
+     function getData(pageName){ //pageName為連線檔名的參數 
+        var req= new XMLHttpRequest();  //ajax：XMLHttpRequest為內建物件 專門用來和伺服器做連線
+        req.open("get","http://127.0.0.1:8887/"+pageName);  //open為設定連線但未送出，get為連線的方法(取得網頁的意思)
+        req.onload=function(){  //onload偵測到連線後，連線狀態完成，連線完成後觸發處理函式function(){alert(this.responseText);}
+        //@ alert(this.responseText); //alert(popular.html內部的內容) this.responseText為自身的內容(這裡指的是popular.html的內容)
+        var content=document.getElementById("content"); //自  動搜尋document裡面名為"content"標籤然後宣告進變數content裡
+        content.innerHTML=this.responseText; //將content標籤寫入popular.html內部的內容
+        };
+        req.send();   //send()為送出連線
+      }; 
+ </script>
+ 
+</head>
+<body onload="getData('popular.html');">  <!--若希望當網頁載入時就顯示則可以寫上當載入時執行getData('popular.html')-->
+  <div>
+     <span onclick="getData('popular.html');">熱門</span>  <!--點擊熱門時執行getData()-->
+     <span onclick="getData('latest.html');">最新</span>
+  </div>
+  <hr/>
+  <div id="content"></div>  <!--用來存放用顯示的內容-->
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>svg向量繪圖</title>
+<script type="text/javascript">
+//利用js建立向量圖，寫法如下
+var svg
+window.onload=function(){
+ svg=document.getElementById("svg");    
+ 
+ var rect=document.createElementNS("http://www.w3.org/2000/svg","rect")
+ rect.setAttribute("x",150);
+ rect.setAttribute("y",250);
+ rect.setAttribute("width",100);
+ rect.setAttribute("height",100);
+ rect.setAttribute("fill","black");
+ svg.appendChild(rect);
+
+ var line=document.createElementNS("http://www.w3.org/2000/svg","line") //document.createElementNS為創建一個元素(URL) http://www.http://www.w3.org/2000/svg為原素域名 line為元素名稱
+ line.setAttribute("x1",50);   //line.setAttribute為設定line元素內的屬性(x1=寬座標 , 50=座標值)  以下以此類推
+ line.setAttribute("y1",150);
+ line.setAttribute("x2",250);
+ line.setAttribute("y2",350);
+ line.setAttribute("stroke","red");
+ line.setAttribute("stroke-width",2);
+ svg.appendChild(line);       //appendChild為將設定好的原素放進svg  (這裡指的是line原素)
+
+ var circle=document.createElementNS("http://www.w3.org/2000/svg","circle")
+ circle.setAttribute("cx",200);
+ circle.setAttribute("cy",150);
+ circle.setAttribute("r",80);
+ circle.setAttribute("fill","blue");
+ circle.setAttribute("stroke","red");
+ svg.appendChild(circle);
+}
+</script>
+</head>
+<body>
+
+
+<svg width="640" height="480" style="border:1px solid #000000">
+    <line x1="50" y1="50" x2="350" y2="350" stroke="red "></line> <!--line為svg線段的標籤x1.y1=第一個座標的 "寬"."高" ， x2.y2=第二個座標的 "寬"."高" stroke為描邊=紅色-->>
+    <circle cx="200" cy="150" r="80" fill="blue" stroke="red"></circle><!--circle為svg圓形的標籤 cx.cy 為 "寬" 與 "高" 座標 r為圓的半徑-->
+    <rect x="150" y="250" width="100" height="100" fill="green"></rect><!--rect為svg方形的標籤 x.y 為方形左上角 "寬" 與 "高" 的座標 後面為設定寬與高的長度-->
+    <polygon points="100,250 ,200,200 ,200,250" fill="black"></polygon><!--polygon為svg多邊形的標籤points=設定多個座標 第一組100,250為第一個座標 第二組200,200為第二個座標 以此類推(所有座標間以逗號為間隔)-->
+    <text x="100" y="450" fill="green" font-weight="bold" font-size="45">hello svg</text><!--svg也可以使用文字標籤，亦可以使用所有字體標籤-->
+</svg>
+
+<svg id="svg" width="640" height="480" style="border:1px solid #000000"></svg>
+</body>
+</html>

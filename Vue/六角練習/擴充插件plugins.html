@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/4.1.17/vee-validate.min.js"></script>
+</head>
+<body>
+    <div id='demo'>
+    <v-form @submit="onSubmit" > <!-- placeholder為預設提示文字 rules為送出時觸發規則函式 -->
+        <v-field name="欄位名稱" type="text" placeholder="Who are you" :rules="isRequired"></v-field>
+        <Error-Message name="欄位名稱"></Error-Message>
+        <button>送出</button>
+    </v-form>
+    </div>
+</body>
+<script type="module">
+    console.log(VeeValidate)                        // 此時已使用cdn插入元件 , 顧可以使用主控台查看
+    const app = Vue.createApp({
+        components:{       // 切記需使用雙駝峰命名    // 定義外部插入元件的名稱 , 並放入html使用
+            VForm:VeeValidate.Form,                 // VeeValidate.Form為元件內的form標籤
+            VField:VeeValidate.Field,               // VeeValidate.Field為元件內的input標籤
+            ErrorMessage:VeeValidate.ErrorMessage   // VeeValidate.ErrorMessage為元件內的錯誤提示名稱
+            
+        },
+        methods: {
+            onSubmit(){
+                console.log("送出成功")
+            },
+            isRequired(value){          
+                if(!value){
+                    return '此欄必填'
+                }
+                return true;
+            }
+        },
+    })
+    app.mount('#demo')
+</script>
+</html>

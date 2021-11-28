@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>函式的運用</title>
+<script type="text/javascript">
+//內建函式
+//alert (hello);
+//函式的基礎
+//設計階段
+
+ function 
+ abc(){alert("hello");}//abc為函式的命名  {}內為函式的本體 
+ abc();   //函式呼叫則是輸入函式的命名 
+ 
+ function 
+ test(message/*參數得名稱*/){alert(message)/*函式的本體*/;}
+ test("hello"/*傳入函式的參數資料*/);
+ test("hi");
+ 
+
+//多參數且運算的寫法如下
+ function 
+ add(n1,n2) {alert(n1*n2);}   //命名為add將參數設定為n1.n2 函式本體為跳出式窗顯示n1*n2
+ add(5,6); //執行函式的命名且將5.6帶入參數n1.n2
+
+//因函式執行完就結束了，若需設定回傳值如下
+ 
+ function
+ add(n1,n2){alert(n1+n2);return 5}  //returm為回傳值
+ var abc=add(5,6);  //先執行函式add 5,6帶入n1.n2參數 函式本體為alert(n1+n2) 此時執行完函式add變為未定義(undefined) 但因設定了回傳值則將5再帶入add
+                    //但因設定了回傳值則將5再帶入add  在宣告變數abc=add則abc=5   
+ alert (abc) ;      //aler(abc)則跳出5     
+ 
+
+//以回傳值做運算帶入變數中的寫法如下
+ function
+ add(n1,n2){alert(n1+n2);return n1+n2;}
+ var aa=add(5,6)*add(20,30);  //參數5,6 參數20,30帶入n1,n2 後alert(n1+n2) 
+                              //後回傳值設定為n1+n2且宣告變數aa=11*50
+ alert(aa);                   //alert(aa)則=550
+ 
+ //函式搭配迴圈使用
+ function getsum(max)         //將參數設定一個名稱      
+ {var sum=0;                  //宣告變數sum=0
+ var n=1;                     //宣告變數n=1
+ while(n<=max){sum=sum+n;n++;}//假設n<=設定參數值(此時參數為空值)，sum則=sum+n且執行n++
+ alert(sum);}                 //呼叫函式後則顯示sum
+
+ getsum(50);                  //此時呼叫函式且將50帶入參數
+
+//函式搭配迴圈後使用回傳值帶入變數做運算寫法如下
+ function getsum(max)         //將參數設定一個名稱      
+ {var sum=0;                  //宣告變數sum=0
+ var n=1;                     //宣告變數n=1
+ while(n<=max){sum=sum+n;n++;}//假設n<=設定參數值(此時參數為空值)，sum則=sum+n且執行n++
+ alert(sum);                 //呼叫函式後則顯示sum
+ return sum;}
+ 
+ var abc=getsum(100)*getsum(100); //宣告變數abc=函式getsum(100)*getsum(100)
+ alert(abc);                      //在顯示出變數
+</script>
+</head>
+</html>

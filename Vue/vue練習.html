@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+    <div id="demo">  
+      
+      <div v-for="menu in menu">       <!-- 菜單 -->
+         <p>{{ menu.name }} / {{menu.price}}元</p>
+         <img :src=menu.imgurl alt="" :style="{width:'100px',height:'100px'}">
+         <button type="button" @click="callCar(menu)">加入購物車</button>
+      </div>
+      
+      <p v-for="car in car">           <!-- 購物車 -->
+            {{ car.name }}
+      </p>
+      
+      {{ total }}                        <!-- 購物車金額 -->
+      <input type="search" v-model="search"><!-- 搜尋欄 -->
+      <div v-for="mysearch in mysearch">{{mysearch.name}}{{mysearch.price}}</div>
+   </div>
+</body>
+<script>
+   Vue.createApp({
+      data() {
+         return {
+            search:'',  //搜尋欄
+            car:[],     //購物車
+            total:'',     //購物車金額
+            menu:       //菜單
+            [
+               {
+               name:'漢堡',
+               price:50,
+               imgurl:'漢堡.jpg'
+               },
+               {
+               name:'薯條',
+               price:40,
+               imgurl:'薯條.jpg'
+               },
+               {
+               name:'可樂',
+               price:30,
+               imgurl:'可樂.jpg'
+               },
+            ]
+         }
+      },
+      methods: {
+         
+         callCar(menu){       //加入購物車
+            console.log(menu)
+            this.car.push(menu)
+            this.mytotal();   //呼叫方法
+         },
+         mytotal(){           //計算購物車金額
+            let total = 0;
+            this.car.forEach( item => {
+               total+=item.price
+               this.total=total
+            });
+         }
+      },
+      computed:{
+         mysearch(){          //搜尋欄
+            return this.menu.filter(item=>{
+               return item.name.match(this.search)
+            })
+         }
+      },
+      watch:{
+         
+      }
+   }).mount('#demo')
+    
+</script>
+</html>

@@ -1,0 +1,56 @@
+輸入npm出現資訊
+	version = 版本
+	description=  專案描述
+	main = 專案進入點
+	scripts = 可以用的指令
+	keywords = 專案關鍵字
+	author = 作者
+	license = 授權條碼
+	
+	npm init -y初始化專案
+
+第三方套件 :
+	由第三方組織或個人提供的套件稱為第三方套件
+	第一方為 自己
+	第二方為 Node
+	此外這三方皆由npm統一彙整管理,並提供管理工具
+
+套件的使用範圍 :
+	單一專案,會安裝在node_modules子資料夾中
+		如 React , webpack
+	全域套件,任何專案都能使用,直接按裝在電腦裡
+		如 mocha , firebase-tools
+
+套件的適用時機 :
+	執行階段使用的套件 : dependencies
+		如 React , express
+
+	開發階段使用的套件 : devDependencies
+		如 webpack babel 
+
+管理單一專案的套件 :
+	安裝執行階段的套件:
+	npm install 套件名稱 --save
+	安裝開發階段的套件:
+	npm install 套件名稱 --save-dev
+更新與解除安裝套件 ：
+	更新套件
+		npm update 套件名稱 
+	解除安裝套件
+		npm uninstall 套件名稱
+
+管理全域的套件 :
+	安裝全域的套件：
+		npm install 套件名稱 -g
+	更新全域的套件
+		npm update 套件名稱 -g
+	解除安裝全域的套件
+		npm uninstall 套件名稱 -g
+
+所有單一專案都會放在 node_modules 資料夾內
+	package.json 專案描述檔中會記錄安裝的套件及版本
+	全域的套件是安裝在電腦中所以不會出現在描述檔中(存在電腦的某一個資料夾)
+
+可以在 package.json 描述檔中的 script 中自訂指令
+	"自定義指令名稱" : "webpack"  
+	只要輸入 npm run "自定義指令名稱" 則會執行webpack進行檔案封裝

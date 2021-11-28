@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+    <title></title>
+</head>
+
+<body>
+    <div id="demo">
+        <div id="target">要被插入的內容區 , </div> <!-- 建立id讓 teleport 能夠找到位置 -->
+        <card1></card1>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({})
+    app.component("card1", {
+        data() {
+            return {}
+        },
+        template: // 在 teleport 標籤中寫入要置入標籤的內容 , 並在 to 屬性中加上要插入的html標籤id
+            `
+        <div>
+            這是原件中的內容
+            <teleport   to="#target">
+                <button>從原件中插入的內容</button>
+            </teleport>    
+            <teleport to="title">  
+                利用元件內的 teleport 改變標題
+            </teleport>   
+        </div>
+
+        `
+    })
+    app.component("card2", {})
+    app.mount("#demo")
+</script>
+
+</html>
